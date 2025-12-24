@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fff0f3;
+            --card-bg: #ffffff;
+            --accent: #ff85a1;
+            --text-main: #5d5d5d;
+            --soft-pink: #ffc8dd;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 95%;
+            max-width: 900px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 133, 161, 0.2);
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* The Scrapbook Layout */
+        .scrapbook-layout {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Left and Right Photo Columns */
+        .photo-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 20%;
+        }
+
+        .center-content {
+            width: 55%;
+            text-align: center;
+        }
+
+        .side-photo {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .side-photo:hover { transform: scale(1.05) rotate(2deg); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .scrapbook-layout { flex-direction: column; }
+            .photo-column { flex-direction: row; width: 100%; justify-content: center; }
+            .side-photo { width: 80px; height: 80px; }
+            .center-content { width: 100%; }
+        }
+
+        /* Elements */
+        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin: 10px 0; }
+        .main-gif { width: 180px; border-radius: 15px; margin-bottom: 10px; }
+        
+        .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-yes { background: var(--accent); color: white; }
+        .btn-no { background: #eee; color: #888; }
+        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 20px; }
+
+        /* Floating Hearts */
+        .heart { position: fixed; color: var(--accent); opacity: 0.5; animation: fly 4s linear forwards; z-index: 0; }
+        @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- PAGE 0: START -->
+        <div id="page-0" class="page active">
+            <div class="center-content" style="width: 100%;">
+                <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
+                <h1>Hi Beautiful...</h1>
+                <p>I have a little surprise for you. Do you want to see it?</p>
+                <div class="btn-wrap">
+                    <button class="btn-yes" onclick="nextPage(1)">Yes, please! ✨</button>
+                    <button class="btn-no" onclick="showSad()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAD STATE -->
+        <div id="sad-page" class="page">
+            <div class="center-content" style="width: 100%;">
+                <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
+                <h1>Oh... okay...</h1>
+                <p>My heart is breaking, but I'll be here if you change your mind.</p>
+                <button class="btn-yes" onclick="hideSad()">I was kidding, show me!</button>
+            </div>
+        </div>
+
+        <!-- PAGE 1: HOW I LIKE HER -->
+        <div id="page-1" class="page">
+            <div class="scrapbook-layout">
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+                <div class="center-content">
+                    <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
+                    <h1>How I Like You</h1>
+                    <p>I like how you laugh at the smallest things and how you make everything feel peaceful.</p>
+                    <div class="btn-wrap">
+                        <button class="btn-nav" onclick="nextPage(0)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(2)">Next →</button>
+                    </div>
+                </div>
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: HOW I LOVE HER -->
+        <div id="page-2" class="page">
+            <div class="scrapbook-layout">
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+                <div class="center-content">
+                    <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
+                    <h1>How I Love You</h1>
+                    <p>I love you more than words can say. You're my favorite person and my safest home.</p>
+                    <div class="btn-wrap">
+                        <button class="btn-nav" onclick="nextPage(1)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(3)">Memories →</button>
+                    </div>
+                </div>
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: MEMORIES -->
+        <div id="page-3" class="page">
+            <div class="scrapbook-layout">
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+                <div class="center-content">
+                    <h1>Our Memories</h1>
+                    <p>Every moment with you is a treasure I keep in my heart forever.</p>
+                    <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
+                    <div class="btn-wrap">
+                        <button class="btn-nav" onclick="nextPage(2)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(4)">Our Song →</button>
+                    </div>
+                </div>
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: THE SONG -->
+        <div id="page-4" class="page">
+            <div class="scrapbook-layout">
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+                <div class="center-content">
+                    <h1>A Song For Us</h1>
+                    <p>This song always makes me think of you...</p>
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tY879X5N7suPsn6Esh0vI?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <div class="btn-wrap">
+                        <button class="btn-nav" onclick="nextPage(3)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(5)">Final Gift →</button>
+                    </div>
+                </div>
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 5: TULIPS -->
+        <div id="page-5" class="page">
+            <div class="scrapbook-layout">
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+                <div class="center-content">
+                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif">
+                    <h1>For You</h1>
+                    <p>I saw your repost and remembered that <b>Tulips</b> are your favorite.</p>
+                    <p style="font-style: italic;">"Just like these, you make my world bloom."</p>
+                    <h1 style="font-size: 3rem;">❤️</h1>
+                    <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
+                </div>
+                <div class="photo-column">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                    <img src="https://via.placeholder.com/150" class="side-photo">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function nextPage(idx) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('sad-page').classList.remove('active');
+            document.getElementById('page-' + idx).classList.add('active');
+            if(idx > 0) spawnHearts();
+        }
+
+        function showSad() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('sad-page').classList.add('active');
+        }
+
+        function hideSad() {
+            nextPage(0);
+        }
+
+        function spawnHearts() {
+            for(let i=0; i<10; i++) {
+                const h = document.createElement('div');
+                h.className = 'heart';
+                h.innerHTML = '❤️';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.top = '100vh';
+                h.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                h.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
