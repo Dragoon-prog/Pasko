@@ -32,7 +32,7 @@
             width: 95%;
             max-width: 1000px;
             background: #fff;
-            padding: 40px 20px;
+            padding: 30px 20px;
             border-radius: 40px;
             box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
             position: relative;
@@ -90,7 +90,6 @@
             display: block;
         }
 
-        /* Random tilts for a natural look */
         .tilt-left { transform: rotate(-3deg); }
         .tilt-right { transform: rotate(3deg); }
         .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 50; }
@@ -98,18 +97,17 @@
         /* Mobile Layout */
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
-            .photo-side { flex-direction: row; width: 100%; justify-content: center; overflow: hidden; }
+            .photo-side { flex-direction: row; width: 100%; justify-content: center; }
             .polaroid { width: 70px; padding: 5px 5px 12px 5px; }
             .center-content { width: 100%; }
         }
 
-        /* Typography */
-        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin-bottom: 5px; }
-        p { line-height: 1.6; font-size: 1.05rem; }
-        .main-gif { width: 160px; border-radius: 15px; margin-bottom: 10px; }
+        /* UI Elements */
+        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.2rem; margin-bottom: 5px; }
+        p { line-height: 1.5; font-size: 1rem; }
+        .main-gif { width: 150px; border-radius: 15px; margin-bottom: 10px; }
         
-        /* Buttons */
-        .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
         button {
             padding: 10px 22px;
             border: none;
@@ -122,7 +120,6 @@
         .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
         .btn-no { background: #f0f0f0; color: #999; }
         .btn-nav { background: var(--soft-pink); color: var(--accent); }
-        button:hover { transform: translateY(-2px); }
 
         /* Floating Hearts */
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 1; }
@@ -133,7 +130,7 @@
 
     <div class="container">
         
-        <!-- PAGE 0: START -->
+        <!-- PAGE 0: CHOICE -->
         <div id="page-0" class="page active">
             <div class="center-content" style="width: 100%;">
                 <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
@@ -156,26 +153,25 @@
             </div>
         </div>
 
-        <!-- PAGE 1: HOW I LIKE HER -->
+        <!-- PAGE 1: HOW I LIKE YOU -->
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200" alt="You"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200" alt="You"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
                     <h1>How I Like You</h1>
-                    <p>You are the most likable, sweet, and lovable person I know—not to mention how incredibly pretty you are.</p>
-                    <p>You deserve every bit of happiness in this world, and it's my favorite mission to be the one who gives it to you. You deserve everything, and more.</p>
+                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, and honestly, you deserve everything beautiful this world has to offer.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(0)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(2)">Next →</button>
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200" alt="You"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200" alt="You"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -212,8 +208,7 @@
                 </div>
                 <div class="center-content">
                     <h1>Our Memories</h1>
-                    <p>Looking back at these photos makes me realize how many beautiful moments we've already shared.</p>
-                    <p>I can't wait to make a thousand more with you.</p>
+                    <p>Every moment we've shared is a memory I treasure. I can't wait to make a thousand more with you.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(2)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(4)">Our Song →</button>
@@ -236,8 +231,10 @@
                 <div class="center-content">
                     <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
                     <h1>A Song for Us</h1>
-                    <p>Every time this song plays, I can't help but smile and think of you.</p>
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tY879X5N7suPsn6Esh0vI?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    
+                    <!-- Your Spotify Link Integrated Here -->
+                    <iframe style="border-radius:12px; margin-bottom:10px;" src="https://open.spotify.com/embed/album/2IklwGsXhUYe77FDKzQlRe?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(3)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(5)">Final Gift →</button>
@@ -258,11 +255,11 @@
                     <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
-                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 220px;">
+                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 200px;">
                     <h1>For You</h1>
                     <p>I saw your repost and remembered that <b>Tulips</b> are your favorite flower.</p>
-                    <p style="font-style: italic; font-weight: 500;">"Just like these flowers, you make my life bloom with happiness."</p>
-                    <h1 style="font-size: 3.5rem; margin-top: 10px;">❤️</h1>
+                    <p style="font-style: italic;">"Just like these flowers, you make my life bloom."</p>
+                    <h1 style="font-size: 3rem;">❤️</h1>
                     <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
                 </div>
                 <div class="photo-side">
