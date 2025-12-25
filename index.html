@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Container */
         .container {
             width: 95%;
             max-width: 1000px;
@@ -39,11 +38,7 @@
             z-index: 10;
         }
 
-        .page {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
+        .page { display: none; animation: fadeIn 0.8s ease; }
         .active { display: block; }
 
         @keyframes fadeIn {
@@ -51,7 +46,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Polaroid Scrapbook Layout */
+        /* Polaroid Layout */
         .scrapbook-layout {
             display: flex;
             flex-direction: row;
@@ -60,20 +55,9 @@
             gap: 15px;
         }
 
-        .photo-side {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 22%;
-        }
+        .photo-side { display: flex; flex-direction: column; gap: 20px; width: 22%; }
+        .center-content { width: 50%; text-align: center; padding: 0 10px; }
 
-        .center-content {
-            width: 50%;
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        /* Polaroid Effect */
         .polaroid {
             background: white;
             padding: 10px 10px 25px 10px;
@@ -83,18 +67,11 @@
             width: 100%;
         }
 
-        .polaroid img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            display: block;
-        }
-
+        .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
         .tilt-left { transform: rotate(-3deg); }
         .tilt-right { transform: rotate(3deg); }
         .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 50; }
 
-        /* Mobile Layout */
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
             .photo-side { flex-direction: row; width: 100%; justify-content: center; }
@@ -102,10 +79,10 @@
             .center-content { width: 100%; }
         }
 
-        /* UI Elements */
+        /* Typography & UI */
         h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.2rem; margin-bottom: 5px; }
         p { line-height: 1.5; font-size: 1rem; }
-        .main-gif { width: 150px; border-radius: 15px; margin-bottom: 10px; }
+        .main-gif { width: 140px; border-radius: 15px; margin-bottom: 10px; }
         
         .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
         button {
@@ -121,16 +98,33 @@
         .btn-no { background: #f0f0f0; color: #999; }
         .btn-nav { background: var(--soft-pink); color: var(--accent); }
 
-        /* Floating Hearts */
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 1; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+
+        /* Video Container for Song */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- PAGE 0: CHOICE -->
+        <!-- PAGE 0: START -->
         <div id="page-0" class="page active">
             <div class="center-content" style="width: 100%;">
                 <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
@@ -153,7 +147,7 @@
             </div>
         </div>
 
-        <!-- PAGE 1: HOW I LIKE YOU -->
+        <!-- PAGE 1: HOW I LIKE YOU (YOUR MESSAGE) -->
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
@@ -163,7 +157,8 @@
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
                     <h1>How I Like You</h1>
-                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, and honestly, you deserve everything beautiful this world has to offer.</p>
+                    <p>You are very likable, very pretty, very sweet, and very lovable.</p>
+                    <p>You deserve all the happiness I'm giving you, and honestly, you deserve everything beautiful this world has to offer.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(0)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(2)">Next →</button>
@@ -176,7 +171,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2: HOW I LOVE HER -->
+        <!-- PAGE 2: HOW I LOVE YOU -->
         <div id="page-2" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
@@ -186,7 +181,7 @@
                 <div class="center-content">
                     <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
                     <h1>How I Love You</h1>
-                    <p>I love you because you're my best friend, my safest home, and my favorite person in the world.</p>
+                    <p>I love you because you're my best friend, my safest home, and my favorite person in the entire world.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(1)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(3)">Memories →</button>
@@ -208,7 +203,7 @@
                 </div>
                 <div class="center-content">
                     <h1>Our Memories</h1>
-                    <p>Every moment we've shared is a memory I treasure. I can't wait to make a thousand more with you.</p>
+                    <p>Looking back at these makes me realize how lucky I am. I can't wait to make a thousand more with you.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(2)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(4)">Our Song →</button>
@@ -221,7 +216,7 @@
             </div>
         </div>
 
-        <!-- PAGE 4: THE SONG -->
+        <!-- PAGE 4: THE SONG (RELIABLE VERSION) -->
         <div id="page-4" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
@@ -232,8 +227,11 @@
                     <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
                     <h1>A Song for Us</h1>
                     
-                    <!-- Your Spotify Link Integrated Here -->
-                    <iframe style="border-radius:12px; margin-bottom:10px;" src="https://open.spotify.com/embed/album/2IklwGsXhUYe77FDKzQlRe?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <!-- YOUTUBE IS MUCH MORE RELIABLE FOR THIS -->
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/target_video_id?autoplay=0" title="Song" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p>(Click play to listen while you look at the photos!)</p>
 
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(3)">← Return</button>
@@ -247,7 +245,7 @@
             </div>
         </div>
 
-        <!-- PAGE 5: TULIPS -->
+        <!-- PAGE 5: TULIPS (FINAL) -->
         <div id="page-5" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
@@ -258,8 +256,8 @@
                     <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 200px;">
                     <h1>For You</h1>
                     <p>I saw your repost and remembered that <b>Tulips</b> are your favorite flower.</p>
-                    <p style="font-style: italic;">"Just like these flowers, you make my life bloom."</p>
-                    <h1 style="font-size: 3rem;">❤️</h1>
+                    <p style="font-style: italic;">"Just like these flowers, you make my life bloom with happiness."</p>
+                    <h1 style="font-size: 3.5rem;">❤️</h1>
                     <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
                 </div>
                 <div class="photo-side">
