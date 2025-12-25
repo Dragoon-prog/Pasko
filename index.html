@@ -93,17 +93,15 @@
             background-color: #f0f0f0;
         }
 
-        /* Random tilts for that messy-cute look */
+        /* Tilted effects */
         .tilt-left { transform: rotate(-4deg); }
         .tilt-right { transform: rotate(4deg); }
         .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 50; }
 
-        /* Typography */
         h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.8rem; margin: 0 0 10px 0; }
         p { line-height: 1.6; font-size: 1.1rem; }
         .main-gif { width: 160px; border-radius: 15px; margin-bottom: 15px; }
         
-        /* Navigation Buttons */
         .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
         button {
             padding: 12px 28px;
@@ -120,11 +118,9 @@
         .btn-nav { background: var(--soft-pink); color: var(--accent); border: 1px solid var(--accent); }
         button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,133,161,0.4); }
 
-        /* Floating Hearts */
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 1; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
-        /* Mobile Layout */
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
             .photo-side { flex-direction: row; width: 100%; justify-content: center; }
@@ -165,9 +161,8 @@
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <!-- REPLACE SRC WITH YOUR OWN PHOTO LINKS -->
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1516589174184-c6858b16ecb0?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
@@ -179,8 +174,8 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
                 </div>
             </div>
         </div>
@@ -189,8 +184,8 @@
         <div id="page-2" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1516589174184-c6858b16ecb0?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
@@ -202,8 +197,8 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
                 </div>
             </div>
         </div>
@@ -212,8 +207,8 @@
         <div id="page-3" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <h1>Our Memories</h1>
@@ -224,27 +219,28 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
                 </div>
             </div>
         </div>
 
-        <!-- PAGE 4: THE SONG -->
+        <!-- PAGE 4: THE SONG (Updated with new Track) -->
         <div id="page-4" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
                     <h1>A Song for Us</h1>
+                    <p>Every time this song plays, I can't help but smile and think of you.</p>
                     
-                    <!-- STABLE SPOTIFY PLAYER -->
+                    <!-- NEW STABLE TRACK EMBED -->
                     <div style="width: 100%; min-height: 152px; margin-bottom: 10px;">
                         <iframe style="border-radius:12px" 
-                            src="https://open.spotify.com/embed/album/2IklwGsXhUYe77FDKzQlRe?utm_source=generator&theme=0" 
+                            src="https://open.spotify.com/embed/track/7GmxAMkSJJzXtIunPvsvsr?utm_source=generator&theme=0" 
                             width="100%" 
                             height="152" 
                             frameBorder="0" 
@@ -260,8 +256,8 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
                 </div>
             </div>
         </div>
@@ -270,8 +266,8 @@
         <div id="page-5" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1520323232435-09995587a530?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 200px;">
@@ -282,8 +278,8 @@
                     <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://images.unsplash.com/photo-1546272989-40c92939c6c2?q=80&w=400&auto=format&fit=crop"></div>
-                    <div class="polaroid tilt-left"><img src="https://images.unsplash.com/photo-1525310238958-2aba1f560c1c?q=80&w=400&auto=format&fit=crop"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
                 </div>
             </div>
         </div>
@@ -292,13 +288,9 @@
 
     <script>
         function nextPage(idx) {
-            // Remove active class from all pages
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Show target page
             document.getElementById('page-' + idx).classList.add('active');
-            // Hide sad page specifically
             document.getElementById('sad-page').classList.remove('active');
-            // Hearts animation
             if(idx > 0) spawnHearts();
         }
 
