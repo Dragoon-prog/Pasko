@@ -8,10 +8,10 @@
     
     <style>
         :root {
-            --bg-color: #fff0f3;
+            --bg-color: #fceef5;
             --card-bg: #ffffff;
             --accent: #ff85a1;
-            --text-main: #5d5d5d;
+            --text-main: #4a4a4a;
             --soft-pink: #ffc8dd;
         }
 
@@ -30,14 +30,13 @@
         /* Container */
         .container {
             width: 95%;
-            max-width: 900px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 133, 161, 0.2);
+            max-width: 1000px;
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
             position: relative;
             z-index: 10;
-            transition: all 0.5s ease;
         }
 
         .page {
@@ -48,59 +47,71 @@
         .active { display: block; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* The Scrapbook Layout */
+        /* Polaroid Scrapbook Layout */
         .scrapbook-layout {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+            justify-content: space-around;
+            gap: 15px;
         }
 
-        /* Left and Right Photo Columns */
-        .photo-column {
+        .photo-side {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            width: 20%;
+            gap: 20px;
+            width: 22%;
         }
 
         .center-content {
-            width: 55%;
+            width: 50%;
             text-align: center;
+            padding: 0 10px;
         }
 
-        .side-photo {
+        /* Polaroid Effect */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.4s ease;
+            width: 100%;
+        }
+
+        .polaroid img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            border-radius: 15px;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            display: block;
         }
 
-        .side-photo:hover { transform: scale(1.05) rotate(2deg); }
+        /* Random tilts for a natural look */
+        .tilt-left { transform: rotate(-3deg); }
+        .tilt-right { transform: rotate(3deg); }
+        .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 50; }
 
-        /* Mobile Adjustments */
+        /* Mobile Layout */
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
-            .photo-column { flex-direction: row; width: 100%; justify-content: center; }
-            .side-photo { width: 80px; height: 80px; }
+            .photo-side { flex-direction: row; width: 100%; justify-content: center; overflow: hidden; }
+            .polaroid { width: 70px; padding: 5px 5px 12px 5px; }
             .center-content { width: 100%; }
         }
 
-        /* Elements */
-        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin: 10px 0; }
-        .main-gif { width: 180px; border-radius: 15px; margin-bottom: 10px; }
+        /* Typography */
+        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin-bottom: 5px; }
+        p { line-height: 1.6; font-size: 1.05rem; }
+        .main-gif { width: 160px; border-radius: 15px; margin-bottom: 10px; }
         
-        .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        /* Buttons */
+        .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
         button {
-            padding: 10px 25px;
+            padding: 10px 22px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -108,12 +119,13 @@
             transition: 0.3s;
             font-family: 'Quicksand', sans-serif;
         }
-        .btn-yes { background: var(--accent); color: white; }
-        .btn-no { background: #eee; color: #888; }
-        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 20px; }
+        .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
+        .btn-no { background: #f0f0f0; color: #999; }
+        .btn-nav { background: var(--soft-pink); color: var(--accent); }
+        button:hover { transform: translateY(-2px); }
 
         /* Floating Hearts */
-        .heart { position: fixed; color: var(--accent); opacity: 0.5; animation: fly 4s linear forwards; z-index: 0; }
+        .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 1; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
@@ -138,31 +150,32 @@
         <div id="sad-page" class="page">
             <div class="center-content" style="width: 100%;">
                 <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
-                <h1>Oh... okay...</h1>
-                <p>My heart is breaking, but I'll be here if you change your mind.</p>
-                <button class="btn-yes" onclick="hideSad()">I was kidding, show me!</button>
+                <h1>My heart... :(</h1>
+                <p>I guess I'll just wait here then...</p>
+                <button class="btn-yes" onclick="nextPage(0)">I changed my mind!</button>
             </div>
         </div>
 
         <!-- PAGE 1: HOW I LIKE HER -->
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200" alt="You"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200" alt="You"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
                     <h1>How I Like You</h1>
-                    <p>I like how you laugh at the smallest things and how you make everything feel peaceful.</p>
+                    <p>You are the most likable, sweet, and lovable person I know—not to mention how incredibly pretty you are.</p>
+                    <p>You deserve every bit of happiness in this world, and it's my favorite mission to be the one who gives it to you. You deserve everything, and more.</p>
                     <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage(0)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(0)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(2)">Next →</button>
                     </div>
                 </div>
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200" alt="You"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200" alt="You"></div>
                 </div>
             </div>
         </div>
@@ -170,22 +183,22 @@
         <!-- PAGE 2: HOW I LOVE HER -->
         <div id="page-2" class="page">
             <div class="scrapbook-layout">
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
                     <h1>How I Love You</h1>
-                    <p>I love you more than words can say. You're my favorite person and my safest home.</p>
+                    <p>I love you because you're my best friend, my safest home, and my favorite person in the world.</p>
                     <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage(1)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(1)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(3)">Memories →</button>
                     </div>
                 </div>
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -193,22 +206,22 @@
         <!-- PAGE 3: MEMORIES -->
         <div id="page-3" class="page">
             <div class="scrapbook-layout">
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <h1>Our Memories</h1>
-                    <p>Every moment with you is a treasure I keep in my heart forever.</p>
-                    <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
+                    <p>Looking back at these photos makes me realize how many beautiful moments we've already shared.</p>
+                    <p>I can't wait to make a thousand more with you.</p>
                     <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage(2)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(2)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(4)">Our Song →</button>
                     </div>
                 </div>
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -216,22 +229,23 @@
         <!-- PAGE 4: THE SONG -->
         <div id="page-4" class="page">
             <div class="scrapbook-layout">
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
-                    <h1>A Song For Us</h1>
-                    <p>This song always makes me think of you...</p>
+                    <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
+                    <h1>A Song for Us</h1>
+                    <p>Every time this song plays, I can't help but smile and think of you.</p>
                     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tY879X5N7suPsn6Esh0vI?utm_source=generator" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                     <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage(3)">← Back</button>
+                        <button class="btn-nav" onclick="nextPage(3)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(5)">Final Gift →</button>
                     </div>
                 </div>
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -239,21 +253,21 @@
         <!-- PAGE 5: TULIPS -->
         <div id="page-5" class="page">
             <div class="scrapbook-layout">
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
-                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif">
+                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 220px;">
                     <h1>For You</h1>
-                    <p>I saw your repost and remembered that <b>Tulips</b> are your favorite.</p>
-                    <p style="font-style: italic;">"Just like these, you make my world bloom."</p>
-                    <h1 style="font-size: 3rem;">❤️</h1>
+                    <p>I saw your repost and remembered that <b>Tulips</b> are your favorite flower.</p>
+                    <p style="font-style: italic; font-weight: 500;">"Just like these flowers, you make my life bloom with happiness."</p>
+                    <h1 style="font-size: 3.5rem; margin-top: 10px;">❤️</h1>
                     <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
                 </div>
-                <div class="photo-column">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
-                    <img src="https://via.placeholder.com/150" class="side-photo">
+                <div class="photo-side">
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -263,7 +277,6 @@
     <script>
         function nextPage(idx) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('sad-page').classList.remove('active');
             document.getElementById('page-' + idx).classList.add('active');
             if(idx > 0) spawnHearts();
         }
@@ -273,21 +286,19 @@
             document.getElementById('sad-page').classList.add('active');
         }
 
-        function hideSad() {
-            nextPage(0);
-        }
-
         function spawnHearts() {
-            for(let i=0; i<10; i++) {
-                const h = document.createElement('div');
-                h.className = 'heart';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.top = '100vh';
-                h.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                h.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 4000);
+            for(let i=0; i<12; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.className = 'heart';
+                    h.innerHTML = '❤️';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.top = '100vh';
+                    h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    h.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), 4000);
+                }, i * 200);
             }
         }
     </script>
