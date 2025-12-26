@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person ❤️</title>
-    <!-- Fonts -->
+    <title>A Special Journey For You ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -14,6 +13,8 @@
             --accent: #ff85a1;
             --text-main: #4a4a4a;
             --soft-pink: #ffc8dd;
+            --env-color: #ffafcc;
+            --env-dark: #fb6f92;
         }
 
         body {
@@ -28,21 +29,80 @@
             overflow-x: hidden;
         }
 
-        /* The Main Container */
         .container {
             width: 95%;
             max-width: 1100px;
-            background: #fff;
-            padding: 40px 20px;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(255, 133, 161, 0.2);
             position: relative;
             z-index: 10;
         }
 
+        /* ---------------------------------
+           ENVELOPE ANIMATION (INTRO & MINI)
+        ------------------------------------ */
+        .envelope-wrapper {
+            position: relative;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin: 20px auto;
+        }
+
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background-color: var(--env-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            z-index: 2;
+            border-top: 110px solid transparent;
+            border-right: 140px solid var(--soft-pink);
+            border-bottom: 90px solid var(--soft-pink);
+            border-left: 140px solid var(--soft-pink);
+            top: -20px;
+        }
+
+        .front-flap {
+            position: absolute;
+            width: 0; height: 0;
+            border-top: 100px solid var(--env-dark);
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            top: 0; z-index: 4;
+            transform-origin: top;
+            transition: all 0.5s ease;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 0; width: 90%; height: 80%;
+            background: white; left: 5%; z-index: 3;
+            transition: all 0.7s ease;
+            padding: 15px; box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
+        }
+
+        .envelope-wrapper.open .front-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .letter { bottom: 80px; height: auto; min-height: 180px; transform: scale(1.1); z-index: 5; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+        /* ---------------------------------
+           PAGE STYLING
+        ------------------------------------ */
         .page {
             display: none;
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
             animation: fadeIn 0.8s ease;
+            text-align: center;
         }
 
         .active { display: block; }
@@ -52,81 +112,66 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Scrapbook Layout: Photos on sides, Text in middle */
         .scrapbook-layout {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-around;
-            gap: 20px;
+            gap: 15px;
         }
 
-        .photo-side {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            width: 22%;
-        }
+        .photo-side { display: flex; flex-direction: column; gap: 20px; width: 22%; }
+        .center-content { width: 50%; }
 
-        .center-content {
-            width: 50%;
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        /* Polaroid Frame Styling */
+        /* Polaroid Effect */
         .polaroid {
             background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            transition: transform 0.4s ease;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0;
             width: 100%;
-            position: relative;
         }
+        .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+        .tilt-left { transform: rotate(-3deg); }
+        .tilt-right { transform: rotate(3deg); }
 
-        .polaroid img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            display: block;
-            background-color: #f0f0f0;
-        }
-
-        /* Tilted effects */
-        .tilt-left { transform: rotate(-4deg); }
-        .tilt-right { transform: rotate(4deg); }
-        .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 50; }
-
-        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.8rem; margin: 0 0 10px 0; }
-        p { line-height: 1.6; font-size: 1.1rem; }
-        .main-gif { width: 160px; border-radius: 15px; margin-bottom: 15px; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin-top: 0; }
+        .main-gif { width: 150px; border-radius: 15px; margin-bottom: 10px; }
         
+        /* Buttons */
         .btn-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
         button {
-            padding: 12px 28px;
+            padding: 12px 25px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 700;
             transition: 0.3s;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1rem;
         }
-        .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
-        .btn-no { background: #f5f5f5; color: #999; }
-        .btn-nav { background: var(--soft-pink); color: var(--accent); border: 1px solid var(--accent); }
-        button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,133,161,0.4); }
+        .btn-yes { background: var(--accent); color: white; }
+        .btn-nav { background: var(--soft-pink); color: var(--accent); }
 
-        .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 1; }
+        /* MINI ENVELOPES GRID FOR LAST PAGE */
+        .gift-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .mini-env-container { transform: scale(0.7); width: 300px; height: 300px; margin: -50px; }
+
+        .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
             .photo-side { flex-direction: row; width: 100%; justify-content: center; }
-            .polaroid { width: 80px; padding: 5px 5px 15px 5px; }
+            .polaroid { width: 70px; padding: 5px 5px 12px 5px; }
             .center-content { width: 100%; }
-            h1 { font-size: 2rem; }
+            .gift-grid { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -134,12 +179,23 @@
 
     <div class="container">
         
-        <!-- PAGE 0: START -->
-        <div id="page-0" class="page active">
-            <div class="center-content" style="width: 100%;">
+        <!-- PAGE 0: INTRO ENVELOPE -->
+        <div id="page-intro" class="active">
+            <div class="envelope-wrapper" id="main-envelope" onclick="this.classList.toggle('open'); document.getElementById('instruction').style.opacity='0'; document.getElementById('start-prompt').style.display='block';">
+                <div class="envelope">
+                    <div class="front-flap"></div>
+                    <div class="letter">
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">Open Me</h2>
+                        <p>A special message inside...</p>
+                    </div>
+                </div>
+            </div>
+            <p id="instruction" style="color: var(--accent); font-weight: bold; transition: 0.5s;">Touch the envelope 💌</p>
+            
+            <div id="start-prompt" style="display: none; margin-top: 20px;">
                 <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
                 <h1>Hi Beautiful...</h1>
-                <p>I have a little surprise for you. Ready to see it?</p>
+                <p>I have a little surprise for you. Do you want to see it?</p>
                 <div class="btn-wrap">
                     <button class="btn-yes" onclick="nextPage(1)">Yes, please! ✨</button>
                     <button class="btn-no" onclick="showSad()">No</button>
@@ -149,33 +205,31 @@
 
         <!-- SAD STATE -->
         <div id="sad-page" class="page">
-            <div class="center-content" style="width: 100%;">
-                <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
-                <h1>My heart... :(</h1>
-                <p>I guess I'll just wait here then...</p>
-                <button class="btn-yes" onclick="nextPage(0)">I changed my mind!</button>
-            </div>
+            <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
+            <h1>Oh... :(</h1>
+            <p>My heart is breaking... change your mind?</p>
+            <button class="btn-yes" onclick="nextPage(0)">Okay, show me!</button>
         </div>
 
         <!-- PAGE 1: HOW I LIKE YOU -->
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
                     <h1>How I Like You</h1>
-                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, and honestly, you deserve everything beautiful this world has to offer.</p>
+                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness im giving you, you deserve everthing.</p>
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(0)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(2)">Next →</button>
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -184,8 +238,8 @@
         <div id="page-2" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
@@ -197,8 +251,8 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -207,8 +261,8 @@
         <div id="page-3" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <h1>Our Memories</h1>
@@ -219,8 +273,8 @@
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
@@ -229,53 +283,81 @@
         <div id="page-4" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                     <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif">
                     <h1>A Song for Us</h1>
-                    <p>Every time this song plays, I can't help but smile and think of you.</p>
-                    
-                    <!-- NEW STABLE TRACK EMBED -->
-                    <div style="width: 100%; min-height: 152px; margin-bottom: 10px;">
+                    <div style="width: 100%; min-height: 152px; margin-bottom: 15px;">
                         <iframe style="border-radius:12px" 
                             src="https://open.spotify.com/embed/track/7GmxAMkSJJzXtIunPvsvsr?utm_source=generator&theme=0" 
-                            width="100%" 
-                            height="152" 
-                            frameBorder="0" 
-                            allowfullscreen="" 
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                            loading="lazy">
+                            width="100%" height="152" frameBorder="0" allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
                         </iframe>
                     </div>
-
                     <div class="btn-wrap">
                         <button class="btn-nav" onclick="nextPage(3)">← Return</button>
                         <button class="btn-nav" onclick="nextPage(5)">Final Gift →</button>
                     </div>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/400"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/400"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
 
-        <!-- PAGE 5: TULIPS (Side Polaroids Removed) -->
+        <!-- PAGE 5: THE 3 FINAL ENVELOPES -->
         <div id="page-5" class="page">
-            <div class="scrapbook-layout" style="justify-content: center;">
-                <div class="center-content" style="width: 80%; max-width: 600px;">
-                    <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 250px;">
-                    <h1>For You</h1>
-                    <p>I saw your repost and remembered that <b>Tulips</b> are your favorite flower.</p>
-                    <p style="font-style: italic;">"Just like these flowers, you make my life bloom."</p>
-                    <h1 style="font-size: 3.5rem; margin-top: 10px;">❤️</h1>
-                    <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage(4)">← Return</button>
-                        <button class="btn-nav" onclick="nextPage(0)">Return to Start</button>
+            <h1>Something for you...</h1>
+            <p>I have three more tiny letters. Open them one by one!</p>
+            
+            <div class="gift-grid">
+                <!-- MINI ENVELOPE 1 -->
+                <div class="mini-env-container">
+                    <div class="envelope-wrapper" onclick="this.classList.toggle('open')">
+                        <div class="envelope">
+                            <div class="front-flap"></div>
+                            <div class="letter">
+                                <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" style="width: 60px;">
+                                <p style="font-size: 0.9rem;">I saw your repost and remembered that <b>Tulips</b> are your favorite!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- MINI ENVELOPE 2 -->
+                <div class="mini-env-container">
+                    <div class="envelope-wrapper" onclick="this.classList.toggle('open')">
+                        <div class="envelope">
+                            <div class="front-flap"></div>
+                            <div class="letter">
+                                <h3 style="font-family:'Dancing Script'; color:var(--accent);">To my love</h3>
+                                <p style="font-size: 0.9rem;">I feel like the luckiest person in the world just to be yours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINI ENVELOPE 3 -->
+                <div class="mini-env-container">
+                    <div class="envelope-wrapper" onclick="this.classList.toggle('open')">
+                        <div class="envelope">
+                            <div class="front-flap"></div>
+                            <div class="letter">
+                                <h2 style="font-family:'Dancing Script'; color:var(--accent); margin:0;">I Love You</h2>
+                                <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" style="width: 70px;">
+                                <p style="font-size: 0.8rem;">Forever & Always ❤️</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button class="btn-nav" onclick="nextPage(4)">← Return</button>
+                <button class="btn-nav" onclick="nextPage(0)">Start Over</button>
             </div>
         </div>
 
@@ -283,13 +365,28 @@
 
     <script>
         function nextPage(idx) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + idx).classList.add('active');
+            // Hide intro and sad page
+            document.getElementById('page-intro').style.display = 'none';
             document.getElementById('sad-page').classList.remove('active');
-            if(idx > 0) spawnHearts();
+            
+            // Hide all other pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            if(idx === 0) {
+                document.getElementById('page-intro').style.display = 'block';
+                document.getElementById('main-envelope').classList.remove('open');
+                document.getElementById('start-prompt').style.display = 'none';
+                document.getElementById('instruction').style.opacity = '1';
+                // Close all mini envelopes for reset
+                document.querySelectorAll('.mini-env-container .envelope-wrapper').forEach(e => e.classList.remove('open'));
+            } else {
+                document.getElementById('page-' + idx).classList.add('active');
+                spawnHearts();
+            }
         }
 
         function showSad() {
+            document.getElementById('page-intro').style.display = 'none';
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('sad-page').classList.add('active');
         }
