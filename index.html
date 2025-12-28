@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person ❤️</title>
+    <title>Our Journey: 2025 to 2026 ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -15,6 +15,7 @@
             --soft-pink: #ffc8dd;
             --env-color: #ffafcc;
             --env-dark: #fb6f92;
+            --gold: #d4af37;
         }
 
         body {
@@ -38,7 +39,7 @@
             padding: 40px 20px;
             border-radius: 40px;
             box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
-            animation: fadeIn 0.6s ease;
+            animation: fadeIn 0.8s ease;
             text-align: center;
         }
         .active { display: block; }
@@ -58,10 +59,9 @@
         
         button { padding: 12px 28px; border: none; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; font-family: 'Quicksand', sans-serif; }
         .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
-        .btn-no { background: #f0f0f0; color: #999; }
         .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; }
 
-        /* Zooming Envelopes on Page 6 */
+        /* Zooming Envelopes */
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
         .envelope-wrapper { position: relative; width: 180px; height: 130px; background-color: var(--env-color); cursor: pointer; perspective: 1000px; transition: 0.3s; }
         .envelope-wrapper .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 90px solid transparent; border-right: 90px solid transparent; border-top: 70px solid var(--env-dark); transform-origin: top; transition: transform 0.4s ease; z-index: 4; }
@@ -75,13 +75,25 @@
 
         #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 500; }
 
+        /* Final Message Card Styling */
+        .final-card {
+            border: 2px solid var(--gold);
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(to bottom, #fff, #fff9f0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sparkle { position: absolute; pointer-events: none; animation: shine 2s infinite; }
+        @keyframes shine { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
             .scrapbook-layout { flex-direction: column; }
             .photo-side { flex-direction: row; width: 100%; }
-            .polaroid { width: 70px; }
             .envelope-wrapper.open .letter-content { transform: scale(1.5) translateY(-20px); width: 220px; }
         }
     </style>
@@ -96,9 +108,9 @@
             <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
             <h1>Hi Beautiful...</h1>
             <p>I have a little surprise for you. Ready to see it?</p>
-            <div class="btn-wrap">
+            <div class="btn-wrap" style="display:flex; justify-content:center; gap:20px;">
                 <button class="btn-yes" onclick="showPage('flower')">Yes, please! ✨</button>
-                <button class="btn-no" onclick="showPage('sad')">No</button>
+                <button style="background:#eee; color:#999; border-radius:50px; border:none; padding:10px 20px;" onclick="showPage('sad')">No</button>
             </div>
         </div>
 
@@ -109,13 +121,12 @@
             <button class="btn-yes" onclick="showPage(0)">Wait, I changed my mind!</button>
         </div>
 
-        <!-- PAGE FLOWER: TULIPS, GERBERAS, LILIES -->
+        <!-- PAGE FLOWER -->
         <div id="page-flower" class="page">
             <img src="https://images.unsplash.com/photo-1525310238958-2aba1f560c1c?q=80&w=500&auto=format&fit=crop" class="main-gif" style="width: 250px;">
             <h1>For You...</h1>
             <p>I wanted to give you these first. 💐</p>
-            <p>A beautiful bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>.</p>
-            <p style="font-style: italic;">"Because flowers this beautiful remind me of you."</p>
+            <p>A bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>.</p>
             <button class="btn-nav" onclick="showPage(1)">Continue →</button>
         </div>
 
@@ -152,10 +163,10 @@
             <h1>Our Memories Together</h1>
             <div class="scrapbook-layout">
                 <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/200"></div></div>
-                <div class="center-content"><p>Every moment we've shared is a memory I treasure forever. I can't wait to make so many more with you.</p></div>
+                <div class="center-content"><p>Every moment we've shared in 2025 is a memory I treasure. I can't wait for 2026 with you.</p></div>
                 <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/200"></div></div>
             </div>
-            <button class="btn-nav" onclick="showPage(4)">The Song I Relate to You →</button>
+            <button class="btn-nav" onclick="showPage(4)">Our Song →</button>
         </div>
 
         <!-- PAGE 4: SONG -->
@@ -167,8 +178,7 @@
 
         <!-- PAGE 5: ZOOMING ENVELOPES -->
         <div id="page-5" class="page">
-            <h1>Final Messages</h1>
-            <p>Open these letters to see my last gifts to you.</p>
+            <h1>Little Gifts</h1>
             <div class="gift-grid">
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
@@ -180,36 +190,44 @@
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">To my Bub</h2>
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent); margin:0;">To my Bub</h2>
                         <p>You make my life bloom with happiness every single day.</p>
                     </div>
                 </div>
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">Forever</h2>
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent); margin:0;">Forever</h2>
                         <p>I love you more than words can ever describe. ❤️</p>
                     </div>
                 </div>
             </div>
-            <button class="btn-nav" style="margin-top: 80px;" onclick="showPage(0)">Return to Start</button>
+            <button class="btn-nav" style="margin-top: 60px; background: var(--accent); color:white;" onclick="showPage(6)">Read my final message for you →</button>
+        </div>
+
+        <!-- NEW PAGE 6: THE FINAL YEAR-END MESSAGE -->
+        <div id="page-6" class="page">
+            <div class="final-card">
+                <h1>2025 ➔ 2026</h1>
+                <img src="https://media.tenor.com/v1.Y2lkPTc5MGI3NjExM3VxdXphcXptNXo5bXpsYnpwdmZqbzN0amg4NXZlZzh6eHB5dWJjZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iY8mSso6k54Xm/giphy.gif" class="main-gif" style="width:120px;">
+                <p style="font-size: 1.2rem; font-weight: 600;">My Last and First Message...</p>
+                <p>As 2025 comes to an end, I want this to be my <b>last message</b> of the year to you: <i>Thank you for being the best part of my year.</i></p>
+                <p>And as the clock strikes midnight and we enter 2026, let this be my <b>first message</b> of the new year: <i>I promise to love you even more today than I did yesterday.</i></p>
+                <p style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--gold);">Let's make 2026 ours. ❤️</p>
+                <button class="btn-nav" onclick="showPage(0)">Start Our Journey Again</button>
+            </div>
         </div>
     </div>
 
     <script>
         function showPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            
-            // If pageId is a number, prefix it. If it's a string like 'flower', use it.
             const target = (typeof pageId === 'number') ? 'page-' + pageId : 'page-' + pageId;
-            
             const targetElement = document.getElementById(target);
-            if (targetElement) {
-                targetElement.classList.add('active');
-            }
+            if (targetElement) targetElement.classList.add('active');
             
             if (pageId !== 0 && pageId !== 'sad') spawnHearts();
+            if (pageId === 6) createSparkles();
             closeAllEnvelopes();
         }
 
@@ -241,6 +259,20 @@
                     document.body.appendChild(h);
                     setTimeout(() => h.remove(), 4000);
                 }, i * 200);
+            }
+        }
+
+        function createSparkles() {
+            const card = document.querySelector('.final-card');
+            for(let i=0; i<20; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.innerHTML = '✨';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                s.style.animationDelay = (Math.random() * 2) + 's';
+                card.appendChild(s);
             }
         }
     </script>
