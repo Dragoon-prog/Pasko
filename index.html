@@ -94,7 +94,8 @@
         }
         .modal-card {
             background: white; padding: 30px; border-radius: 30px;
-            width: 85%; max-width: 380px; text-align: center;
+            width: 85%; max-width: 400px; text-align: center;
+            max-height: 85vh; overflow-y: auto; /* For long messages */
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -104,14 +105,13 @@
         button { border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
         .btn-nav { background: var(--accent); color: white; padding: 12px 25px; margin: 10px 0; }
         
-        /* Force Side-by-Side Return Buttons */
         .button-row {
             display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
             justify-content: center !important; align-items: center !important;
             gap: 10px !important; width: 100% !important; margin-top: 20px !important;
         }
         .btn-small {
-            flex: 1 !important; max-width: 170px !important; font-size: 0.85rem !important;
+            flex: 1 !important; max-width: 175px !important; font-size: 0.85rem !important;
             padding: 12px 5px !important; white-space: nowrap !important;
         }
 
@@ -170,7 +170,7 @@
         <div id="page-1" class="page">
             <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif" style="width:120px;">
             <h1>How I Like You</h1>
-            <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, you deserve everything.</p>
+            <p style="padding: 0 10px; line-height: 1.5;">You are very likable, very pretty, very sweet, very genuine, and very lovable. You deserve all the happiness & love I'm giving you, not just me, but everyone who loves you, you deserve everything baby.</p>
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
@@ -206,7 +206,7 @@
         <!-- PAGE 5: ENVELOPES -->
         <div id="page-5" class="page">
             <h1>Final Gifts</h1>
-            <p>Click each envelope to read my letters.</p>
+            <p>Open these 3 letters just for you.</p>
             <div class="gift-grid">
                 <div class="envelope" onclick="openModal(1)"></div>
                 <div class="envelope" onclick="openModal(2)"></div>
@@ -219,8 +219,8 @@
         <div id="page-6" class="page">
             <div style="border: 2px solid var(--gold); padding: 25px; border-radius: 20px; margin-bottom: 20px;">
                 <h1 class="cursive" style="margin-top:0; font-size: 2.2rem;">2025 ➔ 2026</h1>
-                <p><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
-                <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday.</p>
+                <p style="font-size: 0.95rem;"><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
+                <p style="font-size: 0.95rem;"><b>First message of 2026:</b> I promise to love you even more today than I did yesterday.</p>
                 <h2 class="cursive" style="font-size: 2rem; color: var(--gold); margin-bottom:0;">Let's make 2026 ours. ❤️</h2>
             </div>
             
@@ -248,9 +248,22 @@
         function openModal(num) {
             const body = document.getElementById('modal-body');
             let content = "";
-            if(num === 1) content = `<img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif"><p>I saw your repost and remembered <b>Tulips</b> are your favorite flower... 🌷</p>`;
-            if(num === 2) content = `<h2 class="cursive">To my Bub</h2><p>You make my life bloom with happiness every single day.</p>`;
-            if(num === 3) content = `<h2 class="cursive">Forever</h2><p>I love you more than words can ever describe. ❤️</p>`;
+            if(num === 1) {
+                content = `
+                <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif">
+                <p style="font-size:0.8rem; color:#888;">(I saw your repost and remembered Tulips are your favorite! 🌷)</p>
+                <p style="text-align:justify; font-size:0.9rem; line-height:1.5;">Baby, I love you very much, my love for you is genuine and serious, I hope that we reach the point of having a secure relationship, I wish that my love for you will be felt without having doubts and questions if it’s real, my love, it is real! Lablabmattmat always, hindi ko na kaya na yung araw wala ka, para akong tinanggalan ng ngipin (ngipin?!?!?!?) HAHHAHAHHA hinding hindi ako titingin sa iba, ikaw lang gusto ko and I really respect & love you mwaaa.</p>`;
+            }
+            if(num === 2) {
+                content = `
+                <h2 class="cursive">My Baby</h2>
+                <p style="text-align:justify; font-size:0.9rem; line-height:1.5;">Baby, I hope the world won’t be cruel to you anymore, you’re such a strong girl and I am so proud of you, my baby. You don’t know how much light you have given to my life, life’s been colorful since I loved you, even with the downs we experienced throughout this year, it still gave me colors and even made me grow, if ever na you are worried or felt sorry for all the things that hurt me, I already forgave you, I too am sorry for being such a terrible man, but now I am trying to make bawi, ill try to not make you confused anymore, I love you very much!.</p>`;
+            }
+            if(num === 3) {
+                content = `
+                <h2 class="cursive">I Can't Wait</h2>
+                <p style="text-align:justify; font-size:0.9rem; line-height:1.5;">I can’t wait to see you, your beautiful face, I can’t wait to smell your scent, I can’t wait to hold your hand, I can’t wait to hug you so tight and tell you face to face that I love you very much and I can’t wait to thank you for loving me, even with my flaws and dumb things I did before.</p>`;
+            }
             
             body.innerHTML = content;
             document.getElementById('modal-overlay').style.display = 'flex';
