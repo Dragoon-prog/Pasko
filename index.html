@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Journey ❤️</title>
+    <title>Our Journey ❤️</title>
     
     <!-- Robust Font Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,6 @@
 
         .container { width: 95%; max-width: 900px; position: relative; }
 
-        /* General Page Styling */
         .page {
             display: none; background: #fff; padding: 40px 20px;
             border-radius: 40px; box-shadow: 0 20px 50px rgba(255, 133, 161, 0.2);
@@ -65,99 +64,64 @@
         .film-frame::before { top: -14px; } .film-frame::after { bottom: -14px; }
         .film-frame img { width: 100%; aspect-ratio: 1/1; object-fit: cover; pointer-events: none; }
 
-        /* ✉️ ENVELOPES SECTION ✉️ */
+        /* ✉️ ENVELOPES SECTION */
         .gift-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
-        
         .envelope-container {
             width: 150px; height: 100px; background: var(--env-color);
             position: relative; cursor: pointer; border-radius: 0 0 10px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .envelope-container:hover { transform: translateY(-5px); }
-        
-        /* The Flap */
         .envelope-container::before {
             content: ""; position: absolute; top: 0; left: 0;
             width: 0; height: 0;
-            border-left: 75px solid transparent;
-            border-right: 75px solid transparent;
-            border-top: 60px solid var(--env-dark);
-            z-index: 2;
+            border-left: 75px solid transparent; border-right: 75px solid transparent;
+            border-top: 60px solid var(--env-dark); z-index: 2;
         }
 
-        /* 🏛️ FULLSCREEN MODAL (THE FIX) 🏛️ */
+        /* 🏛️ MODAL OVERLAY */
         #letter-modal {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            display: none; /* Controlled by JS */
-            justify-content: center; align-items: center;
-            z-index: 10000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75); display: none;
+            justify-content: center; align-items: center; z-index: 10000;
             backdrop-filter: blur(10px);
         }
-
         .modal-content {
             background: white; width: 90%; max-width: 400px;
-            padding: 40px 30px; border-radius: 30px;
-            text-align: center; position: relative;
+            padding: 40px 30px; border-radius: 30px; text-align: center;
             animation: popCenter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
-
-        @keyframes popCenter {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
+        @keyframes popCenter { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-content img { width: 150px; border-radius: 15px; margin-bottom: 20px; }
-        .modal-content p { font-size: 1.2rem; line-height: 1.5; color: var(--text-main); }
 
-        .close-btn {
-            background: var(--accent); color: white; border: none;
-            padding: 10px 25px; border-radius: 50px; font-weight: bold;
-            margin-top: 20px; cursor: pointer;
+        /* BUTTONS */
+        .btn-nav { 
+            background: var(--accent); color: white; border: none; 
+            padding: 12px 30px; border-radius: 50px; cursor: pointer; 
+            margin: 10px; font-size: 1rem; transition: 0.3s;
         }
+        .btn-nav:hover { transform: scale(1.05); }
+        .btn-secondary { background: var(--soft-pink); color: var(--accent); }
 
-        /* Other Styles */
-        .btn-nav { background: var(--accent); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; margin-top: 20px; font-size: 1rem; }
-        .btn-nav:hover { background: #ff6b8e; }
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
-
-        @media (max-width: 768px) {
-            .film-frame { width: 160px; }
-            h1 { font-size: 2rem; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- OVERLAY MODAL FOR LETTERS -->
     <div id="letter-modal" onclick="closeLetter()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div id="letter-data"></div>
-            <button class="close-btn" onclick="closeLetter()">Close Letter</button>
+            <button class="btn-nav" onclick="closeLetter()">Close Letter</button>
         </div>
     </div>
 
     <div class="container">
-        
         <!-- PAGE 0: INTRO -->
         <div id="page-0" class="page active">
             <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" style="width:150px;">
             <h1>Hi Beautiful...</h1>
             <p>Ready to see your surprise?</p>
-            <div style="display: flex; justify-content: center; gap: 15px;">
-                <button class="btn-nav" onclick="showPage('flower')">Yes! ✨</button>
-                <button style="background:none; border:none; color:#ccc; cursor:pointer;" onclick="showPage('sad')">No</button>
-            </div>
-        </div>
-
-        <!-- SAD PAGE -->
-        <div id="page-sad" class="page">
-            <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" style="width:150px;">
-            <h1>Oh... :(</h1>
-            <button class="btn-nav" onclick="showPage(0)">Wait, I changed my mind!</button>
+            <button class="btn-nav" onclick="showPage('flower')">Yes! ✨</button>
         </div>
 
         <!-- PAGE FLOWER -->
@@ -169,32 +133,28 @@
             <button class="btn-nav" onclick="showPage(1)">Continue →</button>
         </div>
 
-        <!-- PAGE 1: HOW I LIKE YOU -->
+        <!-- PAGE 1: MESSAGE -->
         <div id="page-1" class="page">
             <h1 class="cursive">How I Like You</h1>
-            <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" style="width:120px;">
             <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, you deserve everything.</p>
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: INTERACTIVE FILM STRIP -->
+        <!-- PAGE 3: FILM -->
         <div id="page-3" class="page">
             <h1 class="cursive">Our Memories</h1>
-            <p style="font-size: 0.8rem; color: #888;">(Drag the film to scroll, hover to pause)</p>
             <div class="film-viewport" id="viewport">
                 <div class="film-strip scrolling" id="strip">
-                    <!-- ADD YOUR 5 PHOTOS HERE -->
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+1"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffc8dd/ffffff?text=Photo+2"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+3"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffc8dd/ffffff?text=Photo+4"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+5"></div>
-                    <!-- REPEAT FOR LOOP -->
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+1"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffc8dd/ffffff?text=Photo+2"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+3"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffc8dd/ffffff?text=Photo+4"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/300/ffafcc/ffffff?text=Photo+5"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                 </div>
             </div>
             <button class="btn-nav" onclick="showPage(4)">Our Song →</button>
@@ -207,7 +167,7 @@
             <button class="btn-nav" onclick="showPage(5)">One Last Thing... →</button>
         </div>
 
-        <!-- PAGE 5: THE ENVELOPES -->
+        <!-- PAGE 5: ENVELOPES -->
         <div id="page-5" class="page">
             <h1 class="cursive">Final Gifts</h1>
             <p>Open these 3 letters just for you.</p>
@@ -221,49 +181,46 @@
 
         <!-- PAGE 6: NEW YEAR -->
         <div id="page-6" class="page">
-            <div style="border: 2px solid var(--gold); padding: 30px; border-radius: 20px;">
+            <div style="border: 2px solid var(--gold); padding: 30px; border-radius: 20px; margin-bottom: 20px;">
                 <h1 class="cursive">2025 ➔ 2026</h1>
                 <p><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
                 <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday.</p>
                 <h2 class="cursive" style="font-size: 2.5rem; color: var(--gold);">Let's make 2026 ours. ❤️</h2>
             </div>
+            
+            <!-- ADDED RETURN BUTTONS HERE -->
+            <button class="btn-nav btn-secondary" onclick="showPage(5)">← Back to Gifts</button>
+            <button class="btn-nav" onclick="showPage(0)">Return to Start</button>
         </div>
-
     </div>
 
     <script>
-        // --- PAGE NAVIGATION ---
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = (typeof id === 'number') ? 'page-' + id : 'page-' + id;
             document.getElementById(target).classList.add('active');
-            if(id !== 0 && id !== 'sad') spawnHearts();
+            if(id !== 0) spawnHearts();
         }
 
-        // --- ENVELOPE/MODAL LOGIC ---
         function openLetter(num) {
             const modal = document.getElementById('letter-modal');
             const content = document.getElementById('letter-data');
-            
             let html = "";
             if(num === 1) {
                 html = `<img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif">
                         <p>I saw your repost and remembered <b>Tulips</b> are your favorite flower... 🌷</p>`;
             } else if(num === 2) {
                 html = `<h2 class="cursive">To my Bub</h2>
-                        <p>You make my life bloom with happiness every single day. I'm so glad I have you.</p>`;
+                        <p>You make my life bloom with happiness every single day.</p>`;
             } else {
                 html = `<h2 class="cursive">Forever</h2>
                         <p>I love you more than words can ever describe. ❤️</p>`;
             }
-            
             content.innerHTML = html;
             modal.style.display = 'flex';
         }
 
-        function closeLetter() {
-            document.getElementById('letter-modal').style.display = 'none';
-        }
+        function closeLetter() { document.getElementById('letter-modal').style.display = 'none'; }
 
         // --- FILM STRIP DRAG LOGIC ---
         const view = document.getElementById('viewport');
