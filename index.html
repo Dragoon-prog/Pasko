@@ -181,18 +181,23 @@
 
         <!-- PAGE 6: NEW YEAR -->
         <div id="page-6" class="page">
-            <div style="border: 2px solid var(--gold); padding: 30px; border-radius: 20px; margin-bottom: 20px;">
-                <h1 class="cursive">2025 ➔ 2026</h1>
+            <div style="border: 2px solid var(--gold); padding: 30px; border-radius: 20px; margin-bottom: 25px;">
+                <h1 class="cursive" style="margin-top:0;">2025 ➔ 2026</h1>
                 <p><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
                 <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday.</p>
-                <h2 class="cursive" style="font-size: 2.5rem; color: var(--gold);">Let's make 2026 ours. ❤️</h2>
+                <h2 class="cursive" style="font-size: 2.2rem; color: var(--gold); margin-bottom:0;">Let's make 2026 ours. ❤️</h2>
             </div>
             
-            <!-- ADDED RETURN BUTTONS HERE -->
-            <button class="btn-nav btn-secondary" onclick="showPage(5)">← Back to Gifts</button>
-            <button class="btn-nav" onclick="showPage(0)">Return to Start</button>
+            <!-- BUTTONS PLACED CLEARLY BELOW THE GOLD BOX -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <button class="btn-nav" style="background: var(--soft-pink); color: var(--accent); width: 200px;" onclick="showPage(5)">
+                    ← Back to Gifts
+                </button>
+                <button class="btn-nav" style="width: 200px;" onclick="showPage(0)">
+                    Return to Start 🏠
+                </button>
+            </div>
         </div>
-    </div>
 
     <script>
         function showPage(id) {
