@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Journey: 2025 to 2026 ❤️</title>
+    
+    <!-- GOOGLE FONTS - DO NOT REMOVE THIS LINK -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -18,9 +22,10 @@
             --gold: #d4af37;
         }
 
+        /* Base Font Settings */
         body {
             margin: 0;
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Quicksand', sans-serif; /* Clean, rounded font */
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
@@ -28,6 +33,15 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        h1, h2, .cursive {
+            font-family: 'Dancing Script', cursive !important; /* Elegant handwriting */
+            color: var(--accent);
+        }
+
+        p, button, span {
+            font-family: 'Quicksand', sans-serif !important;
         }
 
         .container { width: 95%; max-width: 1000px; position: relative; }
@@ -55,7 +69,7 @@
             border-radius: 12px;
             cursor: grab;
             position: relative;
-            user-select: none; /* Prevents text selection while dragging */
+            user-select: none;
         }
         .film-viewport:active { cursor: grabbing; }
 
@@ -63,50 +77,22 @@
             display: flex;
             width: max-content;
             padding-left: 20px;
-            transition: transform 0.1s ease-out; /* Smooth drag feeling */
+            transition: transform 0.1s ease-out;
         }
 
-        /* Auto-scroll animation logic */
-        .scrolling {
-            animation: moveFilm 40s linear infinite;
-        }
-        @keyframes moveFilm {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .scrolling { animation: moveFilm 40s linear infinite; }
+        @keyframes moveFilm { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .film-frame {
-            flex-shrink: 0;
-            width: 220px;
-            margin: 0 12px;
-            background: #000;
-            border-top: 18px solid #000;
-            border-bottom: 18px solid #000;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            flex-shrink: 0; width: 220px; margin: 0 12px; background: #000;
+            border-top: 18px solid #000; border-bottom: 18px solid #000; position: relative;
         }
-
-        /* Sprocket Holes */
         .film-frame::before, .film-frame::after {
-            content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️";
-            position: absolute;
-            color: #ddd;
-            font-size: 10px;
-            width: 100%;
-            text-align: center;
-            left: 0;
-            letter-spacing: 14px;
+            content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️"; position: absolute; color: #ddd;
+            font-size: 10px; width: 100%; text-align: center; left: 0; letter-spacing: 14px;
         }
-        .film-frame::before { top: -16px; }
-        .film-frame::after { bottom: -16px; }
-
-        .film-frame img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            display: block;
-            pointer-events: none; /* Prevents image drag behavior */
-        }
+        .film-frame::before { top: -16px; } .film-frame::after { bottom: -16px; }
+        .film-frame img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; pointer-events: none; }
 
         /* ✉️ CENTERED ZOOM ENVELOPES ✉️ */
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
@@ -118,11 +104,10 @@
         .letter-content {
             position: absolute; top: 5px; left: 5px; width: 170px; height: 120px;
             background: white; z-index: 2; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 15px; box-sizing: border-box; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; opacity: 0; pointer-events: none;
+            padding: 20px; box-sizing: border-box; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; opacity: 0; pointer-events: none;
         }
         
-        /* Centered Pop-up logic */
         .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-wrapper.open .letter-content {
             position: fixed; top: 50%; left: 50%; width: 340px; height: auto; min-height: 260px;
@@ -134,11 +119,12 @@
         #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 1000; backdrop-filter: blur(5px); }
 
         /* Others */
-        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; padding: 12px 28px; border-radius: 50px; border:none; cursor:pointer; font-weight:700; }
+        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; padding: 12px 28px; border-radius: 50px; border:none; cursor:pointer; font-weight:700; font-size: 1rem; }
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
             .envelope-wrapper.open .letter-content { width: 300px; }
             .film-frame { width: 160px; }
         }
@@ -152,7 +138,7 @@
         <!-- PAGE 0: START -->
         <div id="page-0" class="page active">
             <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif" style="width: 150px;">
-            <h1 style="font-family:'Dancing Script'">Hi Beautiful...</h1>
+            <h1>Hi Beautiful...</h1>
             <p>I made a little digital scrapbook for you.</p>
             <button class="btn-nav" style="background:var(--accent); color:white;" onclick="showPage('flower')">Open Surprise ✨</button>
         </div>
@@ -176,17 +162,15 @@
         <!-- PAGE 3: INTERACTIVE FILM MEMORIES -->
         <div id="page-3" class="page">
             <h1 style="margin-bottom:0;">Our Film Memories</h1>
-            <p style="font-size: 0.9rem; color: #888;">Click and drag the film strip to move it!</p>
-            
+            <p style="font-size: 0.9rem; color: #888;">Drag the film strip to see more!</p>
             <div class="film-viewport" id="filmViewport">
                 <div class="film-strip scrolling" id="filmStrip">
-                    <!-- ADD YOUR 5 PHOTOS HERE -->
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
-                    <!-- REPEAT PHOTOS FOR INFINITE FEEL -->
+                    <!-- REPEAT FOR LOOP -->
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
@@ -194,7 +178,6 @@
                     <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                 </div>
             </div>
-            
             <button class="btn-nav" onclick="showPage(4)">Our Song →</button>
         </div>
 
@@ -220,14 +203,14 @@
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">To my Bub</h2>
+                        <h2 class="cursive">To my Bub</h2>
                         <p>You make my life bloom with happiness every single day.</p>
                     </div>
                 </div>
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">Forever</h2>
+                        <h2 class="cursive">Forever</h2>
                         <p>I love you more than words can ever describe. ❤️</p>
                     </div>
                 </div>
@@ -241,14 +224,13 @@
                 <h1>2025 ➔ 2026</h1>
                 <p><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
                 <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday. I'm excited for every day of this year with you.</p>
-                <p style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--gold);">Let's make 2026 ours. ❤️</p>
+                <h2 class="cursive" style="font-size: 2.5rem; color: var(--gold);">Let's make 2026 ours. ❤️</h2>
                 <button class="btn-nav" onclick="showPage(0)">Return to Start</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- Navigation Logic ---
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = (typeof pageId === 'number') ? 'page-' + pageId : 'page-' + pageId;
@@ -257,60 +239,26 @@
             closeAllEnvelopes();
         }
 
-        // --- Interactive Film Strip Logic ---
         const slider = document.getElementById('filmViewport');
         const innerSlider = document.getElementById('filmStrip');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        let isDown = false; let startX; let scrollLeft;
 
-        // Mouse Events
         slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            innerSlider.classList.remove('scrolling'); // Stop auto-scroll when interacting
+            isDown = true; innerSlider.classList.remove('scrolling');
             startX = e.pageX - innerSlider.offsetLeft;
             scrollLeft = innerSlider.style.transform ? parseInt(innerSlider.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
         });
 
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            innerSlider.classList.add('scrolling'); // Resume auto-scroll
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            innerSlider.classList.add('scrolling');
-        });
-
+        slider.addEventListener('mouseleave', () => { isDown = false; innerSlider.classList.add('scrolling'); });
+        slider.addEventListener('mouseup', () => { isDown = false; innerSlider.classList.add('scrolling'); });
         slider.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - innerSlider.offsetLeft;
-            const walk = (x - startX) * 1; // Adjust drag speed
-            innerSlider.style.transform = `translateX(${scrollLeft + walk}px)`;
-        });
-
-        // Touch Events for Mobile
-        slider.addEventListener('touchstart', (e) => {
-            isDown = true;
-            innerSlider.classList.remove('scrolling');
-            startX = e.touches[0].pageX - innerSlider.offsetLeft;
-            scrollLeft = innerSlider.style.transform ? parseInt(innerSlider.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
-        });
-
-        slider.addEventListener('touchend', () => {
-            isDown = false;
-            innerSlider.classList.add('scrolling');
-        });
-
-        slider.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const x = e.touches[0].pageX - innerSlider.offsetLeft;
             const walk = (x - startX) * 1;
             innerSlider.style.transform = `translateX(${scrollLeft + walk}px)`;
         });
 
-        // --- Centered Envelope Logic ---
         function toggleEnvelope(el) {
             const overlay = document.getElementById('zoom-overlay');
             if(el.classList.contains('open')) {
