@@ -45,100 +45,102 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 🎞️ FILM STRIP ANIMATION STYLES 🎞️ */
+        /* 🎞️ CINEMATIC INTERACTIVE FILM STRIP 🎞️ */
         .film-viewport {
             width: 100%;
             overflow: hidden;
-            background: #1a1a1a;
-            padding: 20px 0;
+            background: #111;
+            padding: 30px 0;
             margin: 20px 0;
-            border-radius: 10px;
+            border-radius: 12px;
+            cursor: grab;
             position: relative;
+            user-select: none; /* Prevents text selection while dragging */
         }
+        .film-viewport:active { cursor: grabbing; }
 
         .film-strip {
             display: flex;
             width: max-content;
-            animation: moveFilm 25s linear infinite;
+            padding-left: 20px;
+            transition: transform 0.1s ease-out; /* Smooth drag feeling */
         }
 
-        /* Pause on hover so she can look at a photo */
-        .film-viewport:hover .film-strip {
-            animation-play-state: paused;
+        /* Auto-scroll animation logic */
+        .scrolling {
+            animation: moveFilm 40s linear infinite;
+        }
+        @keyframes moveFilm {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .film-frame {
             flex-shrink: 0;
-            width: 200px;
-            margin: 0 10px;
+            width: 220px;
+            margin: 0 12px;
             background: #000;
-            border-top: 20px solid #000;
-            border-bottom: 20px solid #000;
+            border-top: 18px solid #000;
+            border-bottom: 18px solid #000;
             position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* Sprocket Holes (The little white boxes) */
+        /* Sprocket Holes */
         .film-frame::before, .film-frame::after {
             content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️";
             position: absolute;
-            color: white;
+            color: #ddd;
             font-size: 10px;
             width: 100%;
             text-align: center;
             left: 0;
-            letter-spacing: 12px;
+            letter-spacing: 14px;
         }
-        .film-frame::before { top: -18px; }
-        .film-frame::after { bottom: -18px; }
+        .film-frame::before { top: -16px; }
+        .film-frame::after { bottom: -16px; }
 
         .film-frame img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            border: 2px solid #333;
+            display: block;
+            pointer-events: none; /* Prevents image drag behavior */
         }
 
-        @keyframes moveFilm {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Move half way to loop seamlessly */
-        }
-
-        /* End Film Styles */
-
-        .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #f0f0f0; width: 100%; }
-        .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
-        .tilt-left { transform: rotate(-3deg); } .tilt-right { transform: rotate(3deg); }
-
-        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin-top: 0; }
-        .main-gif { width: 180px; border-radius: 15px; margin-bottom: 15px; }
-        
-        button { padding: 12px 28px; border: none; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; font-family: 'Quicksand', sans-serif; }
-        .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
-        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; }
-
-        /* Zooming Envelopes */
+        /* ✉️ CENTERED ZOOM ENVELOPES ✉️ */
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
         .envelope-wrapper { position: relative; width: 180px; height: 130px; background-color: var(--env-color); cursor: pointer; perspective: 1000px; }
-        .envelope-wrapper .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 90px solid transparent; border-right: 90px solid transparent; border-top: 70px solid var(--env-dark); transform-origin: top; transition: transform 0.4s ease; z-index: 4; }
-        .envelope-wrapper .pocket { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: var(--env-color); z-index: 3; }
-        .envelope-wrapper .pocket::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 90px solid var(--soft-pink); border-right: 90px solid var(--soft-pink); border-bottom: 65px solid var(--soft-pink); z-index: 3; }
-        .letter-content { position: absolute; top: 10px; left: 10px; width: 160px; height: 110px; background: white; z-index: 2; transition: all 0.6s ease; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+        .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 90px solid transparent; border-right: 90px solid transparent; border-top: 70px solid var(--env-dark); transform-origin: top; transition: 0.4s; z-index: 4; }
+        .pocket { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: var(--env-color); z-index: 3; }
+        .pocket::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 90px solid var(--soft-pink); border-right: 90px solid var(--soft-pink); border-bottom: 65px solid var(--soft-pink); z-index: 3; }
         
-        .envelope-wrapper.open { z-index: 1000; }
+        .letter-content {
+            position: absolute; top: 5px; left: 5px; width: 170px; height: 120px;
+            background: white; z-index: 2; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 15px; box-sizing: border-box; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; opacity: 0; pointer-events: none;
+        }
+        
+        /* Centered Pop-up logic */
         .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-wrapper.open .letter-content { transform: scale(2.8) translateY(-50px); z-index: 2000; width: 250px; height: auto; min-height: 200px; }
+        .envelope-wrapper.open .letter-content {
+            position: fixed; top: 50%; left: 50%; width: 340px; height: auto; min-height: 260px;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1; pointer-events: auto; z-index: 2000;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4); border-radius: 20px;
+        }
 
-        #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 500; }
+        #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 1000; backdrop-filter: blur(5px); }
 
-        .final-card { border: 2px solid var(--gold); padding: 30px; border-radius: 20px; background: linear-gradient(to bottom, #fff, #fff9f0); position: relative; overflow: hidden; }
-
+        /* Others */
+        .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; padding: 12px 28px; border-radius: 50px; border:none; cursor:pointer; font-weight:700; }
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
-            .scrapbook-layout { flex-direction: column; }
-            .photo-side { flex-direction: row; width: 100%; }
-            .film-frame { width: 140px; }
+            .envelope-wrapper.open .letter-content { width: 300px; }
+            .film-frame { width: 160px; }
         }
     </style>
 </head>
@@ -149,76 +151,47 @@
     <div class="container">
         <!-- PAGE 0: START -->
         <div id="page-0" class="page active">
-            <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif">
-            <h1>Hi Beautiful...</h1>
-            <p>I have a surprise for you. Ready?</p>
-            <div class="btn-wrap">
-                <button class="btn-yes" onclick="showPage('flower')">Yes! ✨</button>
-                <button style="border:none; background:none; color:#ccc;" onclick="showPage('sad')">No</button>
-            </div>
-        </div>
-
-        <!-- SAD PAGE -->
-        <div id="page-sad" class="page">
-            <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
-            <h1>My heart... :(</h1>
-            <button class="btn-yes" onclick="showPage(0)">Wait, I changed my mind!</button>
+            <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" class="main-gif" style="width: 150px;">
+            <h1 style="font-family:'Dancing Script'">Hi Beautiful...</h1>
+            <p>I made a little digital scrapbook for you.</p>
+            <button class="btn-nav" style="background:var(--accent); color:white;" onclick="showPage('flower')">Open Surprise ✨</button>
         </div>
 
         <!-- PAGE FLOWER -->
         <div id="page-flower" class="page">
             <img src="https://images.unsplash.com/photo-1525310238958-2aba1f560c1c?q=80&w=500&auto=format&fit=crop" class="main-gif" style="width: 250px;">
             <h1>For You...</h1>
-            <p>A bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>.</p>
+            <p>A bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>. 💐</p>
             <button class="btn-nav" onclick="showPage(1)">Continue →</button>
         </div>
 
         <!-- PAGE 1: HOW I LIKE YOU -->
         <div id="page-1" class="page">
-            <div class="scrapbook-layout">
-                <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
-                </div>
-                <div class="center-content">
-                    <h1>How I Like You</h1>
-                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you.</p>
-                    <button class="btn-nav" onclick="showPage(2)">Next Page →</button>
-                </div>
-                <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAGE 2: HOW I LOVE HER -->
-        <div id="page-2" class="page">
-            <h1>How I Love You</h1>
-            <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
-            <p>I love you because you're my best friend and my favorite person.</p>
+            <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif" style="width: 120px;">
+            <h1>How I Like You</h1>
+            <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, you deserve everything.</p>
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: FILM MEMORIES -->
+        <!-- PAGE 3: INTERACTIVE FILM MEMORIES -->
         <div id="page-3" class="page">
-            <h1>Our Film Memories</h1>
-            <p>A little movie of our best moments...</p>
+            <h1 style="margin-bottom:0;">Our Film Memories</h1>
+            <p style="font-size: 0.9rem; color: #888;">Click and drag the film strip to move it!</p>
             
-            <div class="film-viewport">
-                <div class="film-strip">
-                    <!-- ADD YOUR PHOTOS HERE -->
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <!-- DUPLICATE THE PHOTOS BELOW (To make the loop seamless) -->
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
-                    <div class="film-frame"><img src="https://via.placeholder.com/200"></div>
+            <div class="film-viewport" id="filmViewport">
+                <div class="film-strip scrolling" id="filmStrip">
+                    <!-- ADD YOUR 5 PHOTOS HERE -->
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <!-- REPEAT PHOTOS FOR INFINITE FEEL -->
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
+                    <div class="film-frame"><img src="https://via.placeholder.com/300"></div>
                 </div>
             </div>
             
@@ -232,32 +205,42 @@
             <button class="btn-nav" onclick="showPage(5)">One Last Thing... →</button>
         </div>
 
-        <!-- PAGE 5: ENVELOPES -->
+        <!-- PAGE 5: ZOOM ENVELOPES -->
         <div id="page-5" class="page">
-            <h1>Little Gifts</h1>
+            <h1>Final Messages</h1>
+            <p>Open these letters to see my last gifts.</p>
             <div class="gift-grid">
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
-                    <div class="letter-content"><p>I saw your repost and remembered <b>Tulips</b> are your favorite flower... 🌷</p></div>
+                    <div class="letter-content">
+                        <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" style="width: 50px;">
+                        <p>I saw your repost and remembered <b>Tulips</b> are your favorite flower... 🌷</p>
+                    </div>
                 </div>
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
-                    <div class="letter-content"><p>You make my life bloom with happiness every day.</p></div>
+                    <div class="letter-content">
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">To my Bub</h2>
+                        <p>You make my life bloom with happiness every single day.</p>
+                    </div>
                 </div>
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
-                    <div class="letter-content"><p>I love you more than words can describe. ❤️</p></div>
+                    <div class="letter-content">
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">Forever</h2>
+                        <p>I love you more than words can ever describe. ❤️</p>
+                    </div>
                 </div>
             </div>
             <button class="btn-nav" style="margin-top: 60px; background: var(--accent); color:white;" onclick="showPage(6)">Read my final message →</button>
         </div>
 
-        <!-- PAGE 6: FINAL MESSAGE -->
+        <!-- PAGE 6: NEW YEAR MESSAGE -->
         <div id="page-6" class="page">
-            <div class="final-card">
+            <div style="border: 2px solid var(--gold); padding: 30px; border-radius: 20px;">
                 <h1>2025 ➔ 2026</h1>
-                <p><b>Last message of 2025:</b> Thank you for being the best part of my year.</p>
-                <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday.</p>
+                <p><b>Last message of 2025:</b> Thank you for being the best part of my year. I am so lucky you chose me.</p>
+                <p><b>First message of 2026:</b> I promise to love you even more today than I did yesterday. I'm excited for every day of this year with you.</p>
                 <p style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--gold);">Let's make 2026 ours. ❤️</p>
                 <button class="btn-nav" onclick="showPage(0)">Return to Start</button>
             </div>
@@ -265,14 +248,69 @@
     </div>
 
     <script>
+        // --- Navigation Logic ---
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = (typeof pageId === 'number') ? 'page-' + pageId : 'page-' + pageId;
             document.getElementById(target).classList.add('active');
-            if (pageId !== 0 && pageId !== 'sad') spawnHearts();
+            if (pageId !== 0) spawnHearts();
             closeAllEnvelopes();
         }
 
+        // --- Interactive Film Strip Logic ---
+        const slider = document.getElementById('filmViewport');
+        const innerSlider = document.getElementById('filmStrip');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        // Mouse Events
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            innerSlider.classList.remove('scrolling'); // Stop auto-scroll when interacting
+            startX = e.pageX - innerSlider.offsetLeft;
+            scrollLeft = innerSlider.style.transform ? parseInt(innerSlider.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            innerSlider.classList.add('scrolling'); // Resume auto-scroll
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            innerSlider.classList.add('scrolling');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - innerSlider.offsetLeft;
+            const walk = (x - startX) * 1; // Adjust drag speed
+            innerSlider.style.transform = `translateX(${scrollLeft + walk}px)`;
+        });
+
+        // Touch Events for Mobile
+        slider.addEventListener('touchstart', (e) => {
+            isDown = true;
+            innerSlider.classList.remove('scrolling');
+            startX = e.touches[0].pageX - innerSlider.offsetLeft;
+            scrollLeft = innerSlider.style.transform ? parseInt(innerSlider.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
+        });
+
+        slider.addEventListener('touchend', () => {
+            isDown = false;
+            innerSlider.classList.add('scrolling');
+        });
+
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - innerSlider.offsetLeft;
+            const walk = (x - startX) * 1;
+            innerSlider.style.transform = `translateX(${scrollLeft + walk}px)`;
+        });
+
+        // --- Centered Envelope Logic ---
         function toggleEnvelope(el) {
             const overlay = document.getElementById('zoom-overlay');
             if(el.classList.contains('open')) {
