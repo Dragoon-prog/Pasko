@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise For You ❤️</title>
+    <title>For My Favorite Person ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -29,7 +29,7 @@
             overflow-x: hidden;
         }
 
-        .container { width: 95%; max-width: 1100px; position: relative; z-index: 10; }
+        .container { width: 95%; max-width: 1000px; position: relative; }
 
         /* General Page Styling */
         .page {
@@ -38,64 +38,51 @@
             padding: 40px 20px;
             border-radius: 40px;
             box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
-            animation: fadeIn 0.8s ease;
+            animation: fadeIn 0.6s ease;
             text-align: center;
         }
         .active { display: block; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Scrapbook Layout */
+        /* Polaroid scrapbook styling */
         .scrapbook-layout { display: flex; flex-direction: row; align-items: center; justify-content: space-around; gap: 15px; }
-        .photo-side { display: flex; flex-direction: column; gap: 20px; width: 22%; }
+        .photo-side { display: flex; flex-direction: column; gap: 15px; width: 22%; }
         .center-content { width: 50%; }
-        
-        /* Polaroid Effect */
         .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #f0f0f0; width: 100%; }
         .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
         .tilt-left { transform: rotate(-3deg); } .tilt-right { transform: rotate(3deg); }
 
-        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.8rem; margin-top: 0; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 2.5rem; margin-top: 0; }
         .main-gif { width: 180px; border-radius: 15px; margin-bottom: 15px; }
         
-        button { padding: 12px 28px; border: none; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; font-family: 'Quicksand', sans-serif; font-size: 1rem; }
+        button { padding: 12px 28px; border: none; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; font-family: 'Quicksand', sans-serif; }
         .btn-yes { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(255,133,161,0.3); }
         .btn-no { background: #f0f0f0; color: #999; }
         .btn-nav { background: var(--soft-pink); color: var(--accent); margin-top: 15px; }
 
-        /* ------------------------------------------------
-           ZOOMING ENVELOPE STYLES (Final Gift Page)
-        --------------------------------------------------- */
-        .gift-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
-        .envelope-wrapper { position: relative; width: 200px; height: 150px; background-color: var(--env-color); cursor: pointer; perspective: 1000px; transition: 0.3s; }
-        .envelope-wrapper .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 100px solid transparent; border-right: 100px solid transparent; border-top: 80px solid var(--env-dark); transform-origin: top; transition: transform 0.4s ease; z-index: 4; }
+        /* Zooming Envelopes on Page 6 */
+        .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
+        .envelope-wrapper { position: relative; width: 180px; height: 130px; background-color: var(--env-color); cursor: pointer; perspective: 1000px; transition: 0.3s; }
+        .envelope-wrapper .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 90px solid transparent; border-right: 90px solid transparent; border-top: 70px solid var(--env-dark); transform-origin: top; transition: transform 0.4s ease; z-index: 4; }
         .envelope-wrapper .pocket { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: var(--env-color); z-index: 3; }
-        .envelope-wrapper .pocket::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 100px solid var(--soft-pink); border-right: 100px solid var(--soft-pink); border-bottom: 75px solid var(--soft-pink); z-index: 3; }
-        .letter-content { position: absolute; top: 10px; left: 10px; width: 180px; height: 120px; background: white; z-index: 2; transition: all 0.6s ease; padding: 15px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        .envelope-wrapper .pocket::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 90px solid var(--soft-pink); border-right: 90px solid var(--soft-pink); border-bottom: 65px solid var(--soft-pink); z-index: 3; }
+        .letter-content { position: absolute; top: 10px; left: 10px; width: 160px; height: 110px; background: white; z-index: 2; transition: all 0.6s ease; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
         
-        /* Zoom Animation Logic */
         .envelope-wrapper.open { z-index: 1000; }
         .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-wrapper.open .letter-content { 
-            transform: scale(2.8) translateY(-50px); 
-            z-index: 2000; 
-            width: 250px; 
-            height: auto; 
-            min-height: 220px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
-            font-size: 0.9rem;
-        }
+        .envelope-wrapper.open .letter-content { transform: scale(2.8) translateY(-50px); z-index: 2000; width: 250px; height: auto; min-height: 200px; font-size: 0.9rem; }
 
-        #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 500; }
+        #zoom-overlay { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 500; }
 
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
-            .envelope-wrapper.open .letter-content { transform: scale(1.4) translateY(-20px); width: 220px; }
             .scrapbook-layout { flex-direction: column; }
-            .photo-side { flex-direction: row; width: 100%; justify-content: center; }
+            .photo-side { flex-direction: row; width: 100%; }
             .polaroid { width: 70px; }
+            .envelope-wrapper.open .letter-content { transform: scale(1.5) translateY(-20px); width: 220px; }
         }
     </style>
 </head>
@@ -110,80 +97,79 @@
             <h1>Hi Beautiful...</h1>
             <p>I have a little surprise for you. Ready to see it?</p>
             <div class="btn-wrap">
-                <button class="btn-yes" onclick="nextPage('flower')">Yes, please! ✨</button>
-                <button class="btn-no" onclick="showSad()">No</button>
+                <button class="btn-yes" onclick="showPage('flower')">Yes, please! ✨</button>
+                <button class="btn-no" onclick="showPage('sad')">No</button>
             </div>
         </div>
 
-        <!-- NEW PAGE: FLOWER FIRST (TULIPS, 6 GERBERAS, LILIES) -->
+        <!-- SAD PAGE -->
+        <div id="page-sad" class="page">
+            <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
+            <h1>My heart... :(</h1>
+            <button class="btn-yes" onclick="showPage(0)">Wait, I changed my mind!</button>
+        </div>
+
+        <!-- PAGE FLOWER: TULIPS, GERBERAS, LILIES -->
         <div id="page-flower" class="page">
-            <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif" class="main-gif" style="width: 220px;">
+            <img src="https://images.unsplash.com/photo-1525310238958-2aba1f560c1c?q=80&w=500&auto=format&fit=crop" class="main-gif" style="width: 250px;">
             <h1>For You...</h1>
             <p>I wanted to give you these first. 💐</p>
-            <p style="font-weight: 500;">A special mix of Tulips, 6 Gerberas, and Lilies—just for you.</p>
-            <p style="font-style: italic; font-size: 0.9rem;">"Because someone as pretty as you deserves the most beautiful flowers."</p>
-            <button class="btn-nav" onclick="nextPage(1)">Continue →</button>
+            <p>A beautiful bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>.</p>
+            <p style="font-style: italic;">"Because flowers this beautiful remind me of you."</p>
+            <button class="btn-nav" onclick="showPage(1)">Continue →</button>
         </div>
 
-        <div id="sad-page" class="page">
-            <img src="https://media.tenor.com/07_v0JInA9EAAAAi/milk-and-mocha-bear-crying.gif" class="main-gif">
-            <h1>Oh... :(</h1>
-            <button class="btn-yes" onclick="nextPage(0)">I changed my mind!</button>
-        </div>
-
-        <!-- PAGE 1: HOW I LIKE YOU (YOUR MESSAGE) -->
+        <!-- PAGE 1: HOW I LIKE YOU -->
         <div id="page-1" class="page">
             <div class="scrapbook-layout">
                 <div class="photo-side">
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/250"></div>
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/250"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
                 </div>
                 <div class="center-content">
                     <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" class="main-gif">
                     <h1>How I Like You</h1>
-                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, and honestly, you deserve everything.</p>
-                    <div class="btn-wrap">
-                        <button class="btn-nav" onclick="nextPage('flower')">← Back</button>
-                        <button class="btn-nav" onclick="nextPage(2)">Next →</button>
-                    </div>
+                    <p>You are very likable, very pretty, very sweet, and very lovable. You deserve all the happiness I'm giving you, you deserve everything.</p>
+                    <button class="btn-nav" onclick="showPage(2)">Next Page →</button>
                 </div>
                 <div class="photo-side">
-                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/250"></div>
-                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/250"></div>
+                    <div class="polaroid tilt-right"><img src="https://via.placeholder.com/200"></div>
+                    <div class="polaroid tilt-left"><img src="https://via.placeholder.com/200"></div>
                 </div>
             </div>
         </div>
 
+        <!-- PAGE 2: HOW I LOVE HER -->
         <div id="page-2" class="page">
             <h1>How I Love You</h1>
-            <p>I love you because you're my best friend and my safest home in this whole world.</p>
-            <button class="btn-nav" onclick="nextPage(3)">Memories →</button>
+            <img src="https://media.tenor.com/N2_m9S39Vn8AAAAi/milk-and-mocha-hug.gif" class="main-gif">
+            <p>I love you because you're my best friend, my safest home, and my favorite person in the entire world.</p>
+            <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
+        <!-- PAGE 3: MEMORIES -->
         <div id="page-3" class="page">
             <h1>Our Memories Together</h1>
-            <p>Every moment we've shared is a memory I treasure forever.</p>
             <div class="scrapbook-layout">
-                <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/250"></div></div>
-                <div class="center-content"><img src="https://media.tenor.com/T_7M1D8vYm8AAAAi/cute-cat-listening-to-music.gif" class="main-gif"></div>
-                <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/250"></div></div>
+                <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/200"></div></div>
+                <div class="center-content"><p>Every moment we've shared is a memory I treasure forever. I can't wait to make so many more with you.</p></div>
+                <div class="photo-side"><div class="polaroid"><img src="https://via.placeholder.com/200"></div></div>
             </div>
-            <button class="btn-nav" onclick="nextPage(4)">Our Song →</button>
+            <button class="btn-nav" onclick="showPage(4)">The Song I Relate to You →</button>
         </div>
 
+        <!-- PAGE 4: SONG -->
         <div id="page-4" class="page">
-            <h1>The Song I Relate to You</h1>
-            <p>Every time this song plays, it reminds me of us...</p>
+            <h1>A Song for Us</h1>
             <iframe src="https://open.spotify.com/embed/track/7GmxAMkSJJzXtIunPvsvsr" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-            <button class="btn-nav" onclick="nextPage(5)">One Last Thing →</button>
+            <button class="btn-nav" onclick="showPage(5)">One Last Thing... →</button>
         </div>
 
-        <!-- PAGE 5: FINAL GIFTS (ZOOMING ENVELOPES) -->
+        <!-- PAGE 5: ZOOMING ENVELOPES -->
         <div id="page-5" class="page">
-            <h1>For You, My Love</h1>
-            <p>Open these letters to see my final messages.</p>
+            <h1>Final Messages</h1>
+            <p>Open these letters to see my last gifts to you.</p>
             <div class="gift-grid">
-                <!-- Envelope 1: Tulips Repost -->
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
@@ -191,42 +177,40 @@
                         <p>I saw your repost and remembered <b>Tulips</b> are your favorite flower... 🌷</p>
                     </div>
                 </div>
-                <!-- Envelope 2: Sweet Note -->
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent); margin:0;">To My Girl</h2>
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">To my Bub</h2>
                         <p>You make my life bloom with happiness every single day.</p>
                     </div>
                 </div>
-                <!-- Envelope 3: Final I Love You -->
                 <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
                     <div class="flap"></div><div class="pocket"></div>
                     <div class="letter-content">
-                        <h2 style="font-family:'Dancing Script'; color:var(--accent); margin:0;">Forever</h2>
+                        <h2 style="font-family:'Dancing Script'; color:var(--accent);">Forever</h2>
                         <p>I love you more than words can ever describe. ❤️</p>
                     </div>
                 </div>
             </div>
-            <button class="btn-nav" style="margin-top: 80px;" onclick="nextPage(0)">Return to Start</button>
+            <button class="btn-nav" style="margin-top: 80px;" onclick="showPage(0)">Return to Start</button>
         </div>
     </div>
 
     <script>
-        function nextPage(idx) {
+        function showPage(pageId) {
+            // Hide all pages
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('sad-page').classList.remove('active');
             
-            const targetId = (typeof idx === 'string') ? 'page-' + idx : 'page-' + idx;
-            document.getElementById(targetId).classList.add('active');
+            // If pageId is a number, prefix it. If it's a string like 'flower', use it.
+            const target = (typeof pageId === 'number') ? 'page-' + pageId : 'page-' + pageId;
             
-            if(idx !== 0) spawnHearts();
+            const targetElement = document.getElementById(target);
+            if (targetElement) {
+                targetElement.classList.add('active');
+            }
+            
+            if (pageId !== 0 && pageId !== 'sad') spawnHearts();
             closeAllEnvelopes();
-        }
-
-        function showSad() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('sad-page').classList.add('active');
         }
 
         function toggleEnvelope(el) {
