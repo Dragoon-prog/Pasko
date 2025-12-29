@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Claire ❤️</title>
+    <title>Our Journey: 2025 to 2026 ❤️</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,23 +49,22 @@
             position: relative;
             z-index: 10;
             max-height: 95vh;
-            overflow-y: auto;
+            overflow-y: auto; /* Allows scrolling if films are too tall */
         }
 
         .page { display: none; flex-direction: column; align-items: center; justify-content: center; }
         .active { display: flex; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- MULTI-FILM STRIP SYSTEM --- */
+        /* --- THE 3 FILM STRIPS --- */
         .film-viewport {
             width: 100%; overflow: hidden; background: #111;
-            padding: 15px 0; margin: 10px 0; border-radius: 12px; cursor: grab;
+            padding: 15px 0; margin: 8px 0; border-radius: 12px; cursor: grab;
         }
-        .film-strip { display: flex; width: max-content; height: 160px; will-change: transform; }
+        .film-strip { display: flex; width: max-content; height: 140px; will-change: transform; }
         
-        /* Direction Animations */
-        .scrolling-left { animation: moveLeft 40s linear infinite; }
-        .scrolling-right { animation: moveRight 40s linear infinite; }
+        .scrolling-left { animation: moveLeft 45s linear infinite; }
+        .scrolling-right { animation: moveRight 45s linear infinite; }
         
         @keyframes moveLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes moveRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
@@ -110,13 +109,14 @@
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
 
         @media (max-width: 768px) {
-            .film-strip { height: 130px; }
+            .film-strip { height: 110px; }
             h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- LOCAL MUSIC -->
     <audio id="bgMusic" loop><source src="Music.mp3" type="audio/mpeg"></audio>
 
     <div id="modal-overlay" onclick="closeModal()">
@@ -151,11 +151,12 @@
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: THE MOVIE WALL -->
+        <!-- PAGE 3: THE MOVIE WALL (3 ROWS) -->
         <div id="page-3" class="page">
             <h1 class="cursive" style="margin-bottom:5px;">Our Memories</h1>
+            <p style="font-size: 0.7rem; color: #999; margin-bottom: 5px;">(Drag to scroll / Click to zoom)</p>
             
-            <!-- Strip 1: Images 1-6 -->
+            <!-- Row 1: images 1-6 -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip1')" ontouchstart="startDrag(event, 'strip1')">
                 <div class="film-strip scrolling-left" id="strip1">
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
@@ -174,7 +175,7 @@
                 </div>
             </div>
 
-            <!-- Strip 2: Images 7-12 (Moves Opposite) -->
+            <!-- Row 2: images 7-12 (Moves Right) -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip2')" ontouchstart="startDrag(event, 'strip2')">
                 <div class="film-strip scrolling-right" id="strip2">
                     <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
@@ -193,7 +194,7 @@
                 </div>
             </div>
 
-            <!-- Strip 3: Images 13-17 -->
+            <!-- Row 3: images 13-17 -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip3')" ontouchstart="startDrag(event, 'strip3')">
                 <div class="film-strip scrolling-left" id="strip3">
                     <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
@@ -291,7 +292,8 @@
             isDown = true;
             currentDraggingStrip = document.getElementById(stripId);
             currentDraggingStrip.style.animationPlayState = 'paused';
-            startX = (e.pageX || e.touches[0].pageX) - currentDraggingStrip.offsetLeft;
+            const pageX = (e.pageX || e.touches[0].pageX);
+            startX = pageX - currentDraggingStrip.offsetLeft;
             scrollLeft = currentDraggingStrip.style.transform ? parseInt(currentDraggingStrip.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
         }
 
@@ -303,6 +305,22 @@
         });
 
         window.addEventListener('mouseup', () => {
+            if (isDown && currentDraggingStrip) {
+                isDown = false;
+                currentDraggingStrip.style.animationPlayState = 'running';
+                currentDraggingStrip = null;
+            }
+        });
+
+        // Touch for Mobile
+        window.addEventListener('touchmove', (e) => {
+            if (!isDown || !currentDraggingStrip) return;
+            const x = e.touches[0].pageX;
+            const walk = (x - startX);
+            currentDraggingStrip.style.transform = `translateX(${scrollLeft + walk}px)`;
+        });
+
+        window.addEventListener('touchend', () => {
             if (isDown && currentDraggingStrip) {
                 isDown = false;
                 currentDraggingStrip.style.animationPlayState = 'running';
