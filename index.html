@@ -21,14 +21,13 @@
             --gold: #d4af37;
         }
 
-        /* --- THE CENTERING FIX --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* --- 🖱️ Custom Heart Cursor --- */
+        * { box-sizing: border-box; }
         
         html, body {
             height: 100%; width: 100%;
             background-color: var(--bg-color);
-            display: grid;
-            place-items: center; 
+            display: grid; place-items: center; 
             font-family: 'Quicksand', sans-serif;
             overflow: hidden;
             cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important;
@@ -37,93 +36,85 @@
         h1, h2, .cursive { font-family: 'Dancing Script', cursive !important; color: var(--accent); }
         p, button { font-family: 'Quicksand', sans-serif !important; font-weight: 600; }
 
-        /* --- THE WHITE CARD --- */
+        /* --- THE CONTAINER CARD --- */
         .container {
-            width: 92%;
-            max-width: 850px;
-            background: #fff;
-            padding: 35px 25px;
+            width: 92%; max-width: 850px;
+            background: #fff; padding: 35px 25px;
             border-radius: 35px;
             box-shadow: 0 20px 60px rgba(255, 133, 161, 0.3);
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            max-height: 95vh;
-            overflow-y: auto;
+            text-align: center; position: relative; z-index: 10;
+            max-height: 95vh; overflow-y: auto;
         }
 
         .page { display: none; flex-direction: column; align-items: center; justify-content: center; }
         .active { display: flex; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- THE 3 FILM STRIPS --- */
+        /* --- 📸 POLAROID FILM STRIP --- */
         .film-viewport {
-            width: 100%; overflow: hidden; background: #111;
-            padding: 12px 0; margin: 5px 0; border-radius: 12px; cursor: grab;
+            width: 100%; overflow: hidden; padding: 20px 0; margin: 10px 0; cursor: grab;
         }
-        .film-strip { display: flex; width: max-content; height: 130px; will-change: transform; }
-        .scrolling-left { animation: moveLeft 45s linear infinite; }
-        .scrolling-right { animation: moveRight 45s linear infinite; }
+        .film-strip { display: flex; width: max-content; height: 320px; will-change: transform; }
+        .scrolling-left { animation: moveLeft 50s linear infinite; }
+        .scrolling-right { animation: moveRight 50s linear infinite; }
         @keyframes moveLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes moveRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
-        .film-frame {
-            flex-shrink: 0; height: 100%; width: auto; margin: 0 8px; background: #000;
-            border-top: 10px solid #000; border-bottom: 10px solid #000; position: relative;
+        .polaroid-frame {
+            flex-shrink: 0; background: white; padding: 12px 12px 35px 12px;
+            margin: 0 15px; width: 200px; height: 260px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease; position: relative;
         }
-        .film-frame::before, .film-frame::after {
-            content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️"; position: absolute; color: #fff;
-            font-size: 6px; width: 100%; text-align: center; left: 0;
-        }
-        .film-frame::before { top: -10px; } .film-frame::after { bottom: -10px; }
-        .film-frame img { height: 100%; width: auto; display: block; object-fit: contain; pointer-events: none; }
+        /* Random tilts for a scrapbook look */
+        .polaroid-frame:nth-child(odd) { transform: rotate(-2deg); }
+        .polaroid-frame:nth-child(even) { transform: rotate(2deg); }
+        .polaroid-frame:hover { transform: scale(1.1) rotate(0deg); z-index: 100; cursor: pointer; }
 
-        /* --- MODAL --- */
+        .polaroid-frame img { width: 100%; height: 180px; object-fit: cover; border: 1px solid #f0f0f0; }
+        .polaroid-caption { 
+            font-family: 'Dancing Script', cursive; font-size: 1.1rem; 
+            color: #555; margin-top: 12px; display: block;
+        }
+
+        /* --- 🏛️ MODAL OVERLAY --- */
         #modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); display: none;
+            background: rgba(0,0,0,0.7); display: none;
             justify-content: center; align-items: center; z-index: 10000;
             backdrop-filter: blur(8px);
         }
+        /* Zoomed Polaroid Look */
         .modal-card {
-            background: white; padding: 30px; border-radius: 30px;
+            background: white; padding: 20px 20px 50px 20px; border-radius: 5px;
             width: 85%; max-width: 450px; text-align: center;
-            max-height: 80vh; overflow-y: auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-card img.zoomed-pic { width: 100%; height: auto; border-radius: 15px; margin-bottom: 15px; }
+        .modal-card img { width: 100%; height: auto; border: 1px solid #eee; }
+        .modal-card h2 { margin-top: 20px; font-size: 2rem; }
 
         /* --- BUTTONS --- */
         .btn-nav { background: var(--accent); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer !important; margin: 10px 5px; transition: 0.3s; }
         .btn-back { background: var(--soft-pink); color: var(--accent); }
         .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; width: 100% !important; flex-wrap: nowrap !important; }
-        .btn-small { flex: 1 !important; max-width: 170px !important; font-size: 0.8rem !important; white-space: nowrap; }
-
-        .heart { position: fixed; color: var(--accent); pointer-events: none !important; animation: fly 4s linear forwards; z-index: 100; }
-        @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
-
-        .envelope { width: 100px; height: 70px; background: var(--env-color); position: relative; cursor: pointer !important; border-radius: 0 0 5px 5px; }
-        .envelope::after { content: ""; position: absolute; top: 0; left: 0; border-left: 50px solid transparent; border-right: 50px solid transparent; border-top: 35px solid var(--env-dark); pointer-events: none; }
-        .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
 
         @media (max-width: 768px) {
-            .film-strip { height: 110px; }
+            .polaroid-frame { width: 150px; height: 210px; padding: 8px 8px 25px 8px; }
+            .polaroid-frame img { height: 130px; }
             h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOCAL MUSIC -->
     <audio id="bgMusic" loop><source src="Music.mp3" type="audio/mpeg"></audio>
 
-    <!-- Modal for centering messages and zooming images -->
     <div id="modal-overlay" onclick="closeModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div id="modal-body"></div>
-            <button class="btn-nav" onclick="closeModal()">Close Letter</button>
+            <button class="btn-nav" onclick="closeModal()">Close ✨</button>
         </div>
     </div>
 
@@ -139,10 +130,10 @@
 
         <!-- PAGE FLOWER -->
         <div id="page-flower" class="page">
-            <img src="Flower.png" style="width:250px; border-radius:20px; margin-bottom:10px;">
+            <img src="flower.png" style="width:250px; margin-bottom:10px;">
             <h1>For You...</h1>
             <p>I wanted to give you these first. 💐</p>
-            <p>A bouquet of <b>Tulips, 6 Gerberas, carnations, and Lilies</b>.</p>
+            <p>A bouquet of <b>Tulips, 6 Gerberas, and Lilies</b>.</p>
             <div class="button-row">
                 <button class="btn-nav btn-back" onclick="showPage(0)">← Back</button>
                 <button class="btn-nav" onclick="showPage(1)">Continue →</button>
@@ -159,56 +150,40 @@
             </div>
         </div>
 
-        <!-- PAGE 3: THE MOVIE WALL -->
+        <!-- PAGE 3: THE POLAROID MOVIE WALL -->
         <div id="page-3" class="page">
-            <h1 class="cursive" style="margin-bottom:5px;">Our Memories</h1>
+            <h1 class="cursive" style="margin-bottom:0;">Our Memories</h1>
+            <p style="font-size: 0.75rem; color: #999;">(Scroll the film or click a photo to zoom!)</p>
             
             <div class="film-viewport" onmousedown="startDrag(event, 'strip1')" ontouchstart="startDrag(event, 'strip1')">
                 <div class="film-strip scrolling-left" id="strip1">
-                    <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image4.png')"><img src="image4.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image5.png')"><img src="image5.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image-6.png')"><img src="image-6.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image4.png')"><img src="image4.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image5.png')"><img src="image5.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image-6.png')"><img src="image-6.png"></div>
+                    <!-- Row 1 -->
+                    <div class="polaroid-frame" onclick="zoomImg('image.png', 'Roblox natin 🎮')"><img src="image.png"><span class="polaroid-caption">Roblox natin 🎮</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image2.png', 'Our favorite date ☕')"><img src="image2.png"><span class="polaroid-caption">Our favorite date ☕</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image3.png', 'Happy Times ✨')"><img src="image3.png"><span class="polaroid-caption">Happy Times ✨</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image4.png', 'Memorable Moment 📸')"><img src="image4.png"><span class="polaroid-caption">Memorable Moment 📸</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image5.png', 'My Favorite View ❤️')"><img src="image5.png"><span class="polaroid-caption">My Favorite View ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image-6.png', 'Our Story Continues 📖')"><img src="image-6.png"><span class="polaroid-caption">Our Story Continues 📖</span></div>
+                    <!-- Clones -->
+                    <div class="polaroid-frame" onclick="zoomImg('image.png')"><img src="image.png"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image2.png')"><img src="image2.png"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image3.png')"><img src="image3.png"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
                 </div>
             </div>
 
             <div class="film-viewport" onmousedown="startDrag(event, 'strip2')" ontouchstart="startDrag(event, 'strip2')">
                 <div class="film-strip scrolling-right" id="strip2">
-                    <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
-                    <div class="film-frame" onclick="zoomImg('image8.png')"><img src="image8.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image9.png')"><img src="image9.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image10.png')"><img src="image10.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image11.png')"><img src="image11.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image12.png')"><img src="image12.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
-                    <div class="film-frame" onclick="zoomImg('image8.png')"><img src="image8.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image9.png')"><img src="image9.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image10.png')"><img src="image10.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image11.png')"><img src="image11.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image12.png')"><img src="image12.png"></div>
-                </div>
-            </div>
-
-            <div class="film-viewport" onmousedown="startDrag(event, 'strip3')" ontouchstart="startDrag(event, 'strip3')">
-                <div class="film-strip scrolling-left" id="strip3">
-                    <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image14.png')"><img src="image14.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image15.png')"><img src="image15.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image16.png')"><img src="image16.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image17.png')"><img src="image17.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image14.png')"><img src="image14.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image15.png')"><img src="image15.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image16.png')"><img src="image16.png"></div>
-                    <div class="film-frame" onclick="zoomImg('image17.png')"><img src="image17.png"></div>
+                    <!-- Row 2 -->
+                    <div class="polaroid-frame" onclick="zoomImg('image7.jpg', 'So Pretty 😍')"><img src="image7.jpg"><span class="polaroid-caption">So Pretty 😍</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image8.png', 'Always you ❤️')"><img src="image8.png"><span class="polaroid-caption">Always you ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image9.png', 'Sweet moments 🍭')"><img src="image9.png"><span class="polaroid-caption">Sweet moments 🍭</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image10.png', 'Day 6 🐾')"><img src="image10.png"><span class="polaroid-caption">Day 6 🐾</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image11.png', 'Pure Happiness ✨')"><img src="image11.png"><span class="polaroid-caption">Pure Happiness ✨</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image12.png', 'Our world 🌎')"><img src="image12.png"><span class="polaroid-caption">Our world 🌎</span></div>
+                    <!-- Clones -->
+                    <div class="polaroid-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image8.png')"><img src="image8.png"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
+                    <div class="polaroid-frame" onclick="zoomImg('image9.png')"><img src="image9.png"><span class="polaroid-caption">A beautiful memory ❤️</span></div>
                 </div>
             </div>
 
@@ -245,7 +220,7 @@
         <!-- PAGE 6 -->
         <div id="page-6" class="page">
             <div style="max-height: 50vh; overflow-y: auto; padding: 20px; text-align: justify; background: #fffdf9; border: 1px solid #eee; border-radius: 15px; margin-bottom: 15px;">
-                <h1 class="cursive" style="text-align: center; margin-bottom: 10px;">For You, Claire ❤️</h1>
+                <h1 class="cursive" style="text-align: center;">For You, Claire ❤️</h1>
                 <p>These past few days with you have been some of the happiest I’ve had this year. I see the change in us. You’re communicating, I’m taking accountability where I should, and we’re loving each other more than yesterday. It feels like I’m falling for you again and again. I love you so much, Claire, and I can’t wait to spend the New Year and the coming holidays with you. I want all of them to be with you.</p>
                 <br>
                 <p>Thank you for loving me. I pray that we get to spend many more Christmases and New Years together, until we finally reach the dreams we talk about. Bukid, bundok, dagat. I hope them all become real. I’ll keep striving to be better for you and for us. You deserve all the love and happiness I give, and more. Let me be your pahinga, baby.</p>
@@ -254,7 +229,7 @@
                 <h2 class="cursive" style="text-align: center; font-size: 2rem; color: var(--gold); margin-top: 15px;">2025 ➔ 2026 ❤️</h2>
             </div>
             <div class="button-row">
-                <button class="btn-nav btn-small btn-back" onclick="showPage(5)">← Gifts</button>
+                <button class="btn-nav btn-small btn-back" onclick="showPage(5)">← Back</button>
                 <button class="btn-nav btn-small" onclick="showPage(0)">🏠 Home</button>
             </div>
         </div>
@@ -262,26 +237,24 @@
 
     <script>
         const audio = document.getElementById('bgMusic');
-        let currentDraggingStrip = null;
-        let isDown = false; let startX; let scrollLeft = 0;
+        let isDown = false; let startX; let scrollLeft = 0; let currentDraggingStrip = null;
 
         function startExperience() {
-            audio.play().catch(e => console.log("Audio play blocked"));
+            audio.play().catch(e => console.log("Blocked"));
             showPage('flower');
         }
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = (typeof id === 'number') ? 'page-' + id : 'page-' + id;
-            const targetEl = document.getElementById(target);
-            if (targetEl) targetEl.classList.add('active');
+            document.getElementById(target).classList.add('active');
             if(id !== 0) spawnHearts();
             if (id === 4) { audio.volume = 0.2; } else { audio.volume = 1.0; }
         }
 
-        function zoomImg(src) {
+        function zoomImg(src, caption) {
             const body = document.getElementById('modal-body');
-            body.innerHTML = `<img src="${src}" class="zoomed-pic">`;
+            body.innerHTML = `<img src="${src}"><h2>${caption || 'Our Memory ❤️'}</h2>`;
             document.getElementById('modal-overlay').style.display = 'flex';
         }
 
@@ -298,55 +271,25 @@
         function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
 
         function startDrag(e, stripId) {
-            isDown = true;
-            currentDraggingStrip = document.getElementById(stripId);
+            isDown = true; currentDraggingStrip = document.getElementById(stripId);
             currentDraggingStrip.style.animationPlayState = 'paused';
             const pageX = (e.pageX || e.touches[0].pageX);
             startX = pageX - currentDraggingStrip.offsetLeft;
             scrollLeft = currentDraggingStrip.style.transform ? parseInt(currentDraggingStrip.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
         }
 
-        window.addEventListener('mousemove', (e) => {
-            if (!isDown || !currentDraggingStrip) return;
-            const x = e.pageX;
-            const walk = (x - startX);
-            currentDraggingStrip.style.transform = `translateX(${scrollLeft + walk}px)`;
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (isDown && currentDraggingStrip) {
-                isDown = false;
-                currentDraggingStrip.style.animationPlayState = 'running';
-                currentDraggingStrip = null;
-            }
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (!isDown || !currentDraggingStrip) return;
-            const x = e.touches[0].pageX;
-            const walk = (x - startX);
-            currentDraggingStrip.style.transform = `translateX(${scrollLeft + walk}px)`;
-        });
-
-        window.addEventListener('touchend', () => {
-            if (isDown && currentDraggingStrip) {
-                isDown = false;
-                currentDraggingStrip.style.animationPlayState = 'running';
-                currentDraggingStrip = null;
-            }
-        });
+        window.addEventListener('mousemove', (e) => { if (!isDown || !currentDraggingStrip) return; const x = e.pageX; currentDraggingStrip.style.transform = `translateX(${scrollLeft + (x - startX)}px)`; });
+        window.addEventListener('mouseup', () => { if (isDown && currentDraggingStrip) { isDown = false; currentDraggingStrip.style.animationPlayState = 'running'; currentDraggingStrip = null; } });
 
         function spawnHearts() {
-            for(let i=0; i<10; i++) {
+            for(let i=0; i<8; i++) {
                 setTimeout(() => {
-                    const h = document.createElement('div');
-                    h.className = 'heart'; h.innerHTML = '❤️';
-                    h.style.left = Math.random() * 100 + 'vw';
-                    h.style.top = '100vh';
+                    const h = document.createElement('div'); h.className = 'heart'; h.innerHTML = '❤️';
+                    h.style.left = Math.random() * 100 + 'vw'; h.style.top = '100vh';
                     h.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     document.body.appendChild(h);
                     setTimeout(() => h.remove(), 4000);
-                }, i * 300);
+                }, i * 400);
             }
         }
     </script>
