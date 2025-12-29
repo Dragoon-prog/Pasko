@@ -25,10 +25,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body {
-            height: 100%;
-            width: 100%;
+            height: 100%; width: 100%;
             background-color: var(--bg-color);
-            display: flex; /* Using flex for better centering */
+            display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Quicksand', sans-serif;
@@ -100,17 +99,10 @@
         /* --- BUTTONS --- */
         .btn-nav { background: var(--accent); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer !important; margin: 10px 5px; transition: 0.3s; }
         .btn-back { background: var(--soft-pink); color: var(--accent); }
-        .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; width: 100% !important; flex-wrap: nowrap !important; }
+        .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; width: 100% !important; flex-wrap: nowrap !important; gap: 10px; }
         .btn-small { flex: 1 !important; max-width: 170px !important; font-size: 0.8rem !important; white-space: nowrap; }
 
-        /* --- HEARTS FIX --- */
-        .heart { 
-            position: fixed; /* Keep out of body flex flow */
-            color: var(--accent); 
-            pointer-events: none !important; 
-            z-index: 0; 
-            animation: fly 4s linear forwards; 
-        }
+        .heart { position: fixed; color: var(--accent); pointer-events: none !important; animation: fly 4s linear forwards; z-index: 0; }
         @keyframes fly { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
 
         .envelope { width: 100px; height: 70px; background: var(--env-color); position: relative; cursor: pointer !important; border-radius: 0 0 5px 5px; }
@@ -120,24 +112,25 @@
         @media (max-width: 768px) {
             .film-strip { height: 110px; }
             h1 { font-size: 1.6rem; }
+            .container { width: 95%; padding: 25px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOCAL MUSIC -->
+    <!-- LOCAL MUSIC: MATCHES YOUR FILE LIST -->
     <audio id="bgMusic" loop><source src="Music.mp3" type="audio/mpeg"></audio>
 
     <div id="modal-overlay" onclick="closeModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div id="modal-body"></div>
-            <button class="btn-nav" onclick="closeModal()">Close Letter</button>
+            <button class="btn-nav" onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <div class="container">
         
-        <!-- PAGE 0: INTRO -->
+        <!-- PAGE 0: START -->
         <div id="page-0" class="page active">
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp6ZzR0OHZwaW9pZHBieXBtZzJueGZ4bm9oZzR4ZzR4ZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K97K61V449D79K6X3h/giphy.gif" style="width:120px; margin-bottom:10px;">
             <h1 class="cursive">Hi Babyyy...</h1>
@@ -147,7 +140,7 @@
 
         <!-- PAGE FLOWER -->
         <div id="page-flower" class="page">
-            <!-- Fixed lowercase 'flower.png' to match your GitHub -->
+            <!-- Matches Flower.png exactly -->
             <img src="Flower.png" alt="Flower Bouquet" style="width: 280px; max-width: 80%; height: auto; margin-bottom: 15px; display: block;">
             <h1>For You...</h1>
             <p>I wanted to give you these first. 💐</p>
@@ -168,12 +161,11 @@
             </div>
         </div>
 
-        <!-- PAGE 3: THE MOVIE WALL (FULL 17 IMAGES DIVIDED) -->
+        <!-- PAGE 3: THE MOVIE WALL (USING ALL 17 IMAGES FROM YOUR LIST) -->
         <div id="page-3" class="page">
             <h1 class="cursive" style="margin-bottom:5px;">Our Memories</h1>
-            <p style="font-size: 0.7rem; color: #999; margin-bottom: 5px;">(Drag to scroll / Click to zoom)</p>
             
-            <!-- Row 1: images 1-6 -->
+            <!-- Strip 1: image.png to image-6.png -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip1')" ontouchstart="startDrag(event, 'strip1')">
                 <div class="film-strip scrolling-left" id="strip1">
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
@@ -182,7 +174,7 @@
                     <div class="film-frame" onclick="zoomImg('image4.png')"><img src="image4.png"></div>
                     <div class="film-frame" onclick="zoomImg('image5.png')"><img src="image5.png"></div>
                     <div class="film-frame" onclick="zoomImg('image-6.png')"><img src="image-6.png"></div>
-                    <!-- Loop Clones -->
+                    <!-- Clones for Loop -->
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
                     <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
                     <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
@@ -192,7 +184,7 @@
                 </div>
             </div>
 
-            <!-- Row 2: images 7-12 -->
+            <!-- Strip 2: image7.jpg to image12.png -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip2')" ontouchstart="startDrag(event, 'strip2')">
                 <div class="film-strip scrolling-right" id="strip2">
                     <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
@@ -201,7 +193,7 @@
                     <div class="film-frame" onclick="zoomImg('image10.png')"><img src="image10.png"></div>
                     <div class="film-frame" onclick="zoomImg('image11.png')"><img src="image11.png"></div>
                     <div class="film-frame" onclick="zoomImg('image12.png')"><img src="image12.png"></div>
-                    <!-- Loop Clones -->
+                    <!-- Clones -->
                     <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
                     <div class="film-frame" onclick="zoomImg('image8.png')"><img src="image8.png"></div>
                     <div class="film-frame" onclick="zoomImg('image9.png')"><img src="image9.png"></div>
@@ -211,7 +203,7 @@
                 </div>
             </div>
 
-            <!-- Row 3: images 13-17 -->
+            <!-- Strip 3: image13.png to image17.png -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip3')" ontouchstart="startDrag(event, 'strip3')">
                 <div class="film-strip scrolling-left" id="strip3">
                     <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
@@ -219,7 +211,7 @@
                     <div class="film-frame" onclick="zoomImg('image15.png')"><img src="image15.png"></div>
                     <div class="film-frame" onclick="zoomImg('image16.png')"><img src="image16.png"></div>
                     <div class="film-frame" onclick="zoomImg('image17.png')"><img src="image17.png"></div>
-                    <!-- Loop Clones -->
+                    <!-- Clones -->
                     <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
                     <div class="film-frame" onclick="zoomImg('image14.png')"><img src="image14.png"></div>
                     <div class="film-frame" onclick="zoomImg('image15.png')"><img src="image15.png"></div>
@@ -278,8 +270,7 @@
 
     <script>
         const audio = document.getElementById('bgMusic');
-        let currentDraggingStrip = null;
-        let isDown = false; let startX; let scrollLeft = 0;
+        let isDown = false; let startX; let scrollLeft = 0; let currentDraggingStrip = null;
 
         function startExperience() {
             audio.play().catch(e => console.log("Blocked"));
@@ -297,7 +288,7 @@
 
         function zoomImg(src) {
             const body = document.getElementById('modal-body');
-            body.innerHTML = `<img src="${src}" class="zoomed-pic">`;
+            body.innerHTML = `<img src="${src}" class="zoomed-pic" style="max-width:100%; border-radius:10px;">`;
             document.getElementById('modal-overlay').style.display = 'flex';
         }
 
@@ -324,8 +315,7 @@
 
         window.addEventListener('mousemove', (e) => {
             if (!isDown || !currentDraggingStrip) return;
-            const x = e.pageX;
-            currentDraggingStrip.style.transform = `translateX(${scrollLeft + (x - startX)}px)`;
+            currentDraggingStrip.style.transform = `translateX(${scrollLeft + (e.pageX - startX)}px)`;
         });
 
         window.addEventListener('mouseup', () => {
@@ -355,7 +345,6 @@
                 setTimeout(() => {
                     const h = document.createElement('div');
                     h.className = 'heart'; h.innerHTML = '❤️';
-                    // Random horizontal position across the whole screen
                     h.style.left = Math.random() * 100 + 'vw';
                     h.style.top = '100vh';
                     h.style.animationDuration = (Math.random() * 2 + 2) + 's';
