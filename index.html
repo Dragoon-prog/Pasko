@@ -35,56 +35,69 @@
         p, button { font-family: 'Quicksand', sans-serif !important; font-weight: 600; }
 
         .container {
-            width: 90%;
-            max-width: 850px;
+            width: 95%;
+            max-width: 900px;
             background: #fff;
             padding: 30px;
             border-radius: 35px;
             box-shadow: 0 15px 40px rgba(255, 133, 161, 0.2);
             text-align: center;
             position: relative;
-            z-index: 1;
         }
 
         .page { display: none; animation: fadeIn 0.8s ease; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 🎞️ Interactive Film Strip --- */
+        /* --- 🎞️ DYNAMIC FILM STRIP (ADJUSTS TO IMAGE SIZE) --- */
         .film-viewport {
             width: 100%; overflow: hidden; background: #111;
-            padding: 25px 0; margin: 20px 0; border-radius: 12px;
+            padding: 30px 0; margin: 20px 0; border-radius: 12px;
             cursor: grab;
         }
-        .film-strip { display: flex; width: max-content; transition: transform 0.1s ease-out; }
-        .scrolling { animation: moveFilm 60s linear infinite; } /* Slower for more photos */
+        .film-strip { 
+            display: flex; 
+            width: max-content; 
+            height: 300px; /* Fixed height, variable width */
+            transition: transform 0.1s ease-out; 
+        }
+        .scrolling { animation: moveFilm 60s linear infinite; }
         @keyframes moveFilm { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
         .film-frame {
-            flex-shrink: 0; width: 180px; margin: 0 10px; background: #000;
-            border-top: 15px solid #000; border-bottom: 15px solid #000; position: relative;
+            flex-shrink: 0; 
+            height: 100%; /* Fills the 300px height */
+            width: auto; /* Adjusts width based on image ratio */
+            margin: 0 15px; 
+            background: #000;
+            border-top: 20px solid #000; border-bottom: 20px solid #000; 
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
+        
+        /* Sprocket Holes (Responsive Spacing) */
         .film-frame::before, .film-frame::after {
-            content: "▫️ ▫️ ▫️ ▫️"; position: absolute; color: #fff;
-            font-size: 10px; width: 100%; text-align: center; left: 0;
+            content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️"; 
+            position: absolute; color: #fff;
+            font-size: 10px; width: 100%; text-align: center; 
+            left: 0; overflow: hidden; white-space: nowrap;
         }
-        .film-frame::before { top: -14px; } .film-frame::after { bottom: -14px; }
-        .film-frame img { width: 100%; aspect-ratio: 1/1; object-fit: cover; pointer-events: none; }
+        .film-frame::before { top: -16px; } 
+        .film-frame::after { bottom: -16px; }
 
-        /* --- ✉️ Envelopes Grid --- */
+        .film-frame img { 
+            height: 100%; 
+            width: auto; 
+            display: block; 
+            pointer-events: none; 
+            border: 1px solid #333;
+        }
+
+        /* --- ✉️ ENVELOPES & MODALS --- */
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .envelope {
-            width: 120px; height: 85px; background: var(--env-color);
-            position: relative; cursor: pointer; border-radius: 0 0 5px 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .envelope::after {
-            content: ""; position: absolute; top: 0; left: 0;
-            border-left: 60px solid transparent; border-right: 60px solid transparent;
-            border-top: 45px solid var(--env-dark);
-        }
+        .envelope { width: 120px; height: 85px; background: var(--env-color); position: relative; cursor: pointer; border-radius: 0 0 5px 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .envelope::after { content: ""; position: absolute; top: 0; left: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-top: 45px solid var(--env-dark); }
 
-        /* --- 🏛️ Fixed Modal Popup --- */
         #modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); display: none;
@@ -94,31 +107,24 @@
         .modal-card {
             background: white; padding: 35px; border-radius: 30px;
             width: 85%; max-width: 450px; text-align: center;
-            max-height: 80vh; overflow-y: auto;
+            max-height: 85vh; overflow-y: auto;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* --- Buttons --- */
+        /* --- UI COMPONENTS --- */
         button { border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
         .btn-nav { background: var(--accent); color: white; padding: 12px 25px; margin: 10px 0; }
-        
-        .button-row {
-            display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
-            justify-content: center !important; align-items: center !important;
-            gap: 10px !important; width: 100% !important; margin-top: 20px !important;
-        }
+        .button-row { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; justify-content: center !important; gap: 10px !important; width: 100% !important; margin-top: 20px !important; }
         .btn-small { flex: 1 !important; max-width: 175px !important; font-size: 0.8rem !important; padding: 12px 5px !important; white-space: nowrap !important; }
-
         .main-gif { width: 150px; border-radius: 15px; margin-bottom: 10px; }
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
-            .container { padding: 20px; }
+            .film-strip { height: 220px; }
             h1 { font-size: 1.8rem; }
-            .film-frame { width: 150px; }
         }
     </style>
 </head>
@@ -168,7 +174,7 @@
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: MEMORIES (LINKED TO YOUR GITHUB IMAGES) -->
+        <!-- PAGE 3: MEMORIES (FILM STRIP - NOW AUTO-SIZING) -->
         <div id="page-3" class="page">
             <h1>Our Memories</h1>
             <p style="font-size: 0.8rem; color: #888;">Drag the film strip to scroll!</p>
@@ -192,8 +198,7 @@
                     <div class="film-frame"><img src="image15.png"></div>
                     <div class="film-frame"><img src="image16.png"></div>
                     <div class="film-frame"><img src="image17.png"></div>
-                    
-                    <!-- Duplicate all for seamless looping -->
+                    <!-- Clones for Looping -->
                     <div class="film-frame"><img src="image.png"></div>
                     <div class="film-frame"><img src="image2.png"></div>
                     <div class="film-frame"><img src="image3.png"></div>
@@ -263,39 +268,29 @@
             if(id !== 0 && id !== 'sad') spawnHearts();
         }
 
-        // CONTENT FOR ENVELOPES
         function openModal(num) {
             const body = document.getElementById('modal-body');
             let content = "";
-            
             if(num === 1) {
-                content = `
-                <img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif">
+                content = `<img src="https://media.tenor.com/9C0D394-0v8AAAAi/flowers-tulips.gif">
                 <p style="font-size:0.8rem; color:#888;">(I remembered Tulips are your favorite! 🌷)</p>
-                <p style="text-align:justify; line-height:1.6; color:#333;">Baby, I love you very much, my love for you is genuine and serious, I hope that we reach the point of having a secure relationship, I wish that my love for you will be felt without having doubts and questions if it’s real, my love, it is real!</p>
-                <p style="text-align:justify; line-height:1.6; color:#333;">Lablabmattmat always, hindi ko na kaya na yung araw wala ka, para akong tinanggalan ng ngipin (ngipin?!?!?!?) HAHHAHAHHA hinding hindi ako titingin sa iba, ikaw lang gusto ko and I really respect & love you mwaaa.</p>`;
+                <p style="text-align:justify; line-height:1.6;">Baby, I love you very much, my love for you is genuine and serious, I hope that we reach the point of having a secure relationship, I wish that my love for you will be felt without having doubts and questions if it’s real, my love, it is real!</p>
+                <p style="text-align:justify; line-height:1.6;">Lablabmattmat always, hindi ko na kaya na yung araw wala ka, para akong tinanggalan ng ngipin (ngipin?!?!?!?) HAHHAHAHHA hinding hindi ako titingin sa iba, ikaw lang gusto ko and I really respect & love you mwaaa.</p>`;
             }
             if(num === 2) {
-                content = `
-                <h2 class="cursive">My Baby</h2>
-                <p style="text-align:justify; line-height:1.6; color:#333;">Baby, I hope the world won’t be cruel to you anymore, you’re such a strong girl and I am so proud of you, my baby.</p>
-                <p style="text-align:justify; line-height:1.6; color:#333;">You don’t know how much light you have given to my life, life’s been colorful since I loved you, even with the downs we experienced throughout this year, it still gave me colors and even made me grow.</p>
-                <p style="text-align:justify; line-height:1.6; color:#333;">If ever na you are worried or felt sorry for all the things that hurt me, I already forgave you, I too am sorry for being such a terrible man, but now I am trying to make bawi, ill try to not make you confused anymore, I love you very much!.</p>`;
+                content = `<h2 class="cursive">My Strong Girl</h2>
+                <p style="text-align:justify; line-height:1.6;">Baby, I hope the world won’t be cruel to you anymore, you’re such a strong girl and I am so proud of you, my baby. You don’t know how much light you have given to my life, life’s been colorful since I loved you, even with the downs we experienced throughout this year, it still gave me colors and even made me grow. If ever na you are worried or felt sorry for all the things that hurt me, I already forgave you, I too am sorry for being such a terrible man, but now I am trying to make bawi, ill try to not make you confused anymore, I love you very much!.</p>`;
             }
             if(num === 3) {
-                content = `
-                <h2 class="cursive">I Can't Wait</h2>
-                <p style="text-align:justify; line-height:1.6; color:#333;">I can’t wait to see you, your beautiful face, I can’t wait to smell your scent, I can’t wait to hold your hand, I can’t wait to hug you so tight and tell you face to face that I love you very much.</p>
-                <p style="text-align:justify; line-height:1.6; color:#333;">And I can’t wait to thank you for loving me, even with my flaws and dumb things I did before.</p>`;
+                content = `<h2 class="cursive">I Can't Wait</h2>
+                <p style="text-align:justify; line-height:1.6;">I can’t wait to see you, your beautiful face, I can’t wait to smell your scent, I can’t wait to hold your hand, I can’t wait to hug you so tight and tell you face to face that I love you very much. And I can’t wait to thank you for loving me, even with my flaws and dumb things I did before.</p>`;
             }
-            
             body.innerHTML = content;
             document.getElementById('modal-overlay').style.display = 'flex';
         }
 
         function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
 
-        // FILM STRIP DRAG LOGIC
         const view = document.getElementById('viewport');
         const strip = document.getElementById('strip');
         let isDown = false; let startX; let scrollLeft;
