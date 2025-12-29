@@ -21,18 +21,16 @@
             --gold: #d4af37;
         }
 
-        /* --- 🚨 THE CENTERING FIX 🚨 --- */
+        /* --- THE CENTERING FIX --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body {
-            height: 100%;
-            width: 100%;
+            height: 100%; width: 100%;
             background-color: var(--bg-color);
-            /* This forces the container to the absolute center */
             display: grid;
             place-items: center; 
             font-family: 'Quicksand', sans-serif;
-            overflow: hidden; /* Prevents unwanted scrolling on the main background */
+            overflow: hidden;
             cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important;
         }
 
@@ -94,7 +92,7 @@
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-card img.zoomed-pic { width: 100%; height: auto; border-radius: 15px; margin-bottom: 15px; }
 
-        /* --- Final Message Long Letter --- */
+        /* --- Letter Styling --- */
         .final-letter-container {
             max-height: 50vh; overflow-y: auto; padding: 20px;
             text-align: justify; background: #fffdf9;
@@ -102,10 +100,10 @@
         }
 
         /* --- Buttons --- */
-        button { border: none; border-radius: 50px; cursor: pointer !important; transition: 0.3s; pointer-events: auto !important; }
+        button { border: none; border-radius: 50px; cursor: pointer !important; transition: 0.3s; z-index: 50; }
         .btn-nav { background: var(--accent); color: white; padding: 12px 25px; margin: 10px 0; }
         .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; gap: 10px !important; width: 100% !important; margin-top: 10px !important; }
-        .btn-small { flex: 1 !important; max-width: 170px !important; font-size: 0.75rem !important; white-space: nowrap; }
+        .btn-small { flex: 1 !important; max-width: 170px !important; font-size: 0.8rem !important; white-space: nowrap; }
 
         .heart { position: fixed; color: var(--accent); pointer-events: none !important; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
@@ -118,7 +116,7 @@
 </head>
 <body>
 
-    <!-- MUSIC PLAYER - Matches Music.mp3 exactly -->
+    <!-- MUSIC PLAYER -->
     <audio id="bgMusic" loop>
         <source src="Music.mp3" type="audio/mpeg">
     </audio>
@@ -131,7 +129,6 @@
     </div>
 
     <div class="container">
-        
         <!-- PAGE 0: START -->
         <div id="page-0" class="page active">
             <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" style="width:130px; margin-bottom: 15px;">
@@ -157,11 +154,32 @@
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: MEMORIES -->
+        <!-- PAGE 3: MEMORIES (ALL 17 IMAGES ADDED) -->
         <div id="page-3" class="page">
             <h1>Our Memories</h1>
+            <p style="font-size: 0.8rem; color: #888;">Drag the film to scroll. Click a photo to zoom! 🎞️</p>
             <div class="film-viewport" id="viewport">
                 <div class="film-strip" id="strip">
+                    <!-- Images 1-17 -->
+                    <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image4.png')"><img src="image4.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image5.png')"><img src="image5.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image-6.png')"><img src="image-6.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
+                    <div class="film-frame" onclick="zoomImg('image8.png')"><img src="image8.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image9.png')"><img src="image9.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image10.png')"><img src="image10.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image11.png')"><img src="image11.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image12.png')"><img src="image12.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image14.png')"><img src="image14.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image15.png')"><img src="image15.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image16.png')"><img src="image16.png"></div>
+                    <div class="film-frame" onclick="zoomImg('image17.png')"><img src="image17.png"></div>
+                    
+                    <!-- Duplicated for Loop -->
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
                     <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
                     <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
