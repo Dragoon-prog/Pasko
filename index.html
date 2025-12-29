@@ -21,12 +21,14 @@
             --gold: #d4af37;
         }
 
-        /* --- THE CENTERING FIX --- */
+        /* --- THE ULTIMATE CENTERING FIX --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body {
-            height: 100%; width: 100%;
+            height: 100%;
+            width: 100%;
             background-color: var(--bg-color);
+            /* Flexbox ensures the card is perfectly centered vertically and horizontally */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -41,23 +43,21 @@
         /* --- THE WHITE CARD --- */
         .container {
             width: 92%;
-            max-width: 850px;
+            max-width: 800px;
             background: #fff;
-            padding: 35px 25px;
+            padding: 40px 30px;
             border-radius: 35px;
             box-shadow: 0 20px 60px rgba(255, 133, 161, 0.3);
             text-align: center;
             position: relative;
-            z-index: 10;
-            max-height: 95vh;
-            overflow-y: auto;
+            z-index: 10; /* Keeps card above falling hearts */
         }
 
         .page { display: none; flex-direction: column; align-items: center; justify-content: center; }
         .active { display: flex; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- THE 3 FILM STRIPS --- */
+        /* --- FILM STRIPS --- */
         .film-viewport {
             width: 100%; overflow: hidden; background: #111;
             padding: 12px 0; margin: 5px 0; border-radius: 12px; cursor: grab;
@@ -90,7 +90,7 @@
             background: white; padding: 30px; border-radius: 30px;
             width: 85%; max-width: 450px; text-align: center;
             max-height: 80vh; overflow-y: auto;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -99,10 +99,16 @@
         /* --- BUTTONS --- */
         .btn-nav { background: var(--accent); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer !important; margin: 10px 5px; transition: 0.3s; }
         .btn-back { background: var(--soft-pink); color: var(--accent); }
-        .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; width: 100% !important; flex-wrap: nowrap !important; gap: 10px; }
-        .btn-small { flex: 1 !important; max-width: 170px !important; font-size: 0.8rem !important; white-space: nowrap; }
+        .button-row { display: flex !important; flex-direction: row !important; justify-content: center !important; width: 100% !important; flex-wrap: nowrap !important; }
 
-        .heart { position: fixed; color: var(--accent); pointer-events: none !important; animation: fly 4s linear forwards; z-index: 0; }
+        /* --- HEARTS FIX --- */
+        .heart { 
+            position: fixed; /* Fixed to viewport, not container */
+            color: var(--accent); 
+            pointer-events: none !important; 
+            z-index: 1; /* Behind the card but on the screen */
+            animation: fly 4s linear forwards; 
+        }
         @keyframes fly { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
 
         .envelope { width: 100px; height: 70px; background: var(--env-color); position: relative; cursor: pointer !important; border-radius: 0 0 5px 5px; }
@@ -118,7 +124,7 @@
 </head>
 <body>
 
-    <!-- LOCAL MUSIC: MATCHES YOUR FILE LIST -->
+    <!-- Matches Music.mp3 exactly -->
     <audio id="bgMusic" loop><source src="Music.mp3" type="audio/mpeg"></audio>
 
     <div id="modal-overlay" onclick="closeModal()">
@@ -140,7 +146,7 @@
 
         <!-- PAGE FLOWER -->
         <div id="page-flower" class="page">
-            <!-- Matches Flower.png exactly -->
+            <!-- Fixed Capital 'F' to match Flower.png on GitHub -->
             <img src="Flower.png" alt="Flower Bouquet" style="width: 280px; max-width: 80%; height: auto; margin-bottom: 15px; display: block;">
             <h1>For You...</h1>
             <p>I wanted to give you these first. 💐</p>
@@ -161,11 +167,11 @@
             </div>
         </div>
 
-        <!-- PAGE 3: THE MOVIE WALL (USING ALL 17 IMAGES FROM YOUR LIST) -->
+        <!-- PAGE 3: THE MOVIE WALL -->
         <div id="page-3" class="page">
             <h1 class="cursive" style="margin-bottom:5px;">Our Memories</h1>
             
-            <!-- Strip 1: image.png to image-6.png -->
+            <!-- Strip 1: images 1-6 -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip1')" ontouchstart="startDrag(event, 'strip1')">
                 <div class="film-strip scrolling-left" id="strip1">
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
@@ -174,7 +180,7 @@
                     <div class="film-frame" onclick="zoomImg('image4.png')"><img src="image4.png"></div>
                     <div class="film-frame" onclick="zoomImg('image5.png')"><img src="image5.png"></div>
                     <div class="film-frame" onclick="zoomImg('image-6.png')"><img src="image-6.png"></div>
-                    <!-- Clones for Loop -->
+                    <!-- Clones -->
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
                     <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
                     <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
@@ -184,7 +190,7 @@
                 </div>
             </div>
 
-            <!-- Strip 2: image7.jpg to image12.png -->
+            <!-- Strip 2: images 7-12 -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip2')" ontouchstart="startDrag(event, 'strip2')">
                 <div class="film-strip scrolling-right" id="strip2">
                     <div class="film-frame" onclick="zoomImg('image7.jpg')"><img src="image7.jpg"></div>
@@ -203,7 +209,7 @@
                 </div>
             </div>
 
-            <!-- Strip 3: image13.png to image17.png -->
+            <!-- Strip 3: images 13-17 -->
             <div class="film-viewport" onmousedown="startDrag(event, 'strip3')" ontouchstart="startDrag(event, 'strip3')">
                 <div class="film-strip scrolling-left" id="strip3">
                     <div class="film-frame" onclick="zoomImg('image13.png')"><img src="image13.png"></div>
@@ -288,7 +294,7 @@
 
         function zoomImg(src) {
             const body = document.getElementById('modal-body');
-            body.innerHTML = `<img src="${src}" class="zoomed-pic" style="max-width:100%; border-radius:10px;">`;
+            body.innerHTML = `<img src="${src}" class="zoomed-pic">`;
             document.getElementById('modal-overlay').style.display = 'flex';
         }
 
@@ -305,49 +311,28 @@
         function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
 
         function startDrag(e, stripId) {
-            isDown = true;
-            currentDraggingStrip = document.getElementById(stripId);
+            isDown = true; currentDraggingStrip = document.getElementById(stripId);
             currentDraggingStrip.style.animationPlayState = 'paused';
             const pageX = (e.pageX || e.touches[0].pageX);
             startX = pageX - currentDraggingStrip.offsetLeft;
             scrollLeft = currentDraggingStrip.style.transform ? parseInt(currentDraggingStrip.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
         }
 
-        window.addEventListener('mousemove', (e) => {
-            if (!isDown || !currentDraggingStrip) return;
-            currentDraggingStrip.style.transform = `translateX(${scrollLeft + (e.pageX - startX)}px)`;
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (isDown && currentDraggingStrip) {
-                isDown = false;
-                currentDraggingStrip.style.animationPlayState = 'running';
-                currentDraggingStrip = null;
-            }
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (!isDown || !currentDraggingStrip) return;
-            const x = e.touches[0].pageX;
-            currentDraggingStrip.style.transform = `translateX(${scrollLeft + (x - startX)}px)`;
-        });
-
-        window.addEventListener('touchend', () => {
-            if (isDown && currentDraggingStrip) {
-                isDown = false;
-                currentDraggingStrip.style.animationPlayState = 'running';
-                currentDraggingStrip = null;
-            }
-        });
+        window.addEventListener('mousemove', (e) => { if (!isDown || !currentDraggingStrip) return; currentDraggingStrip.style.transform = `translateX(${scrollLeft + (e.pageX - startX)}px)`; });
+        window.addEventListener('mouseup', () => { if (isDown && currentDraggingStrip) { isDown = false; currentDraggingStrip.style.animationPlayState = 'running'; currentDraggingStrip = null; } });
+        window.addEventListener('touchmove', (e) => { if (!isDown || !currentDraggingStrip) return; currentDraggingStrip.style.transform = `translateX(${scrollLeft + (e.touches[0].pageX - startX)}px)`; });
+        window.addEventListener('touchend', () => { if (isDown && currentDraggingStrip) { isDown = false; currentDraggingStrip.style.animationPlayState = 'running'; currentDraggingStrip = null; } });
 
         function spawnHearts() {
             for(let i=0; i<15; i++) {
                 setTimeout(() => {
                     const h = document.createElement('div');
                     h.className = 'heart'; h.innerHTML = '❤️';
-                    h.style.left = Math.random() * 100 + 'vw';
+                    // Random horizontal position across the whole screen width
+                    h.style.left = (Math.random() * 100) + 'vw';
                     h.style.top = '100vh';
                     h.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    // Append to body so flex centering doesn't affect them
                     document.body.appendChild(h);
                     setTimeout(() => h.remove(), 4000);
                 }, i * 300);
