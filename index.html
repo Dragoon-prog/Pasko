@@ -24,9 +24,9 @@
         /* --- 🖱️ Custom Heart Cursor --- */
         * { 
             box-sizing: border-box; 
-            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important; 
         }
         
+        /* Apply cursor to body only so it doesn't block buttons */
         body {
             margin: 0; padding: 0;
             font-family: 'Quicksand', sans-serif;
@@ -34,6 +34,7 @@
             color: var(--text-main);
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; overflow-x: hidden;
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto;
         }
 
         h1, h2, .cursive { font-family: 'Dancing Script', cursive !important; color: var(--accent); }
@@ -58,11 +59,7 @@
             cursor: grab; position: relative;
             touch-action: pan-y;
         }
-        .film-strip { 
-            display: flex; width: max-content; height: 300px;
-            will-change: transform;
-        }
-        
+        .film-strip { display: flex; width: max-content; height: 300px; will-change: transform; }
         .film-frame {
             flex-shrink: 0; height: 100%; width: auto;
             margin: 0 15px; background: #000;
@@ -70,17 +67,12 @@
             position: relative; transition: transform 0.3s;
         }
         .film-frame:hover { transform: scale(1.02); filter: brightness(1.2); }
-        
         .film-frame::before, .film-frame::after {
             content: "▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️ ▫️"; position: absolute; color: #fff;
             font-size: 10px; width: 100%; text-align: center; left: 0; overflow: hidden;
         }
         .film-frame::before { top: -16px; } .film-frame::after { bottom: -16px; }
-        
-        .film-frame img { 
-            height: 100%; width: auto; 
-            display: block; object-fit: contain;
-        }
+        .film-frame img { height: 100%; width: auto; display: block; object-fit: contain; }
 
         /* --- ✉️ Envelopes & Modal --- */
         .gift-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
@@ -103,7 +95,6 @@
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-card img.zoomed-pic { width: 100%; height: auto; border-radius: 15px; margin-bottom: 15px; }
 
-        /* --- Final Message Long Letter Styling --- */
         .final-letter-container {
             max-height: 60vh; overflow-y: auto; padding: 20px;
             text-align: justify; background: #fffdf9;
@@ -111,7 +102,10 @@
         }
 
         /* --- Buttons --- */
-        button { border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
+        button { 
+            border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; 
+            pointer-events: auto !important; /* Forces button to be clickable */
+        }
         .btn-nav { background: var(--accent); color: white; padding: 12px 28px; margin: 10px 0; }
         .button-row { 
             display: flex !important; flex-direction: row !important; 
@@ -123,7 +117,6 @@
         .heart { position: fixed; color: var(--accent); pointer-events: none; animation: fly 4s linear forwards; z-index: 100; }
         @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
 
-        /* Hidden Audio Helper */
         #bg-music-container { position: absolute; left: -9999px; top: -9999px; visibility: hidden; }
 
         @media (max-width: 768px) {
@@ -134,10 +127,7 @@
 </head>
 <body>
 
-    <!-- HIDDEN BACKGROUND MUSIC PLAYER (Libu-Libong Buwan) -->
-    <div id="bg-music-container">
-        <div id="player"></div>
-    </div>
+    <div id="bg-music-container"><div id="player"></div></div>
 
     <div id="modal-overlay" onclick="closeModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
@@ -148,7 +138,7 @@
 
     <div class="container">
         
-        <!-- PAGE 0: INTRO -->
+        <!-- PAGE 0 -->
         <div id="page-0" class="page active">
             <img src="https://media.tenor.com/7S_m995S_78AAAAi/mochi-peach-cat-cute-cat.gif" style="width:150px;">
             <h1 class="cursive">Hi Claire...</h1>
@@ -165,7 +155,7 @@
             <button class="btn-nav" onclick="showPage(1)">Continue →</button>
         </div>
 
-        <!-- PAGE 1: HOW I LIKE YOU -->
+        <!-- PAGE 1 -->
         <div id="page-1" class="page">
             <img src="https://media.tenor.com/978m-07Bv_IAAAAi/heart-love.gif" style="width:120px;">
             <h1>How I Like You</h1>
@@ -173,13 +163,12 @@
             <button class="btn-nav" onclick="showPage(3)">Our Memories →</button>
         </div>
 
-        <!-- PAGE 3: MEMORIES FILM STRIP -->
+        <!-- PAGE 3 -->
         <div id="page-3" class="page">
             <h1>Our Memories</h1>
             <p style="font-size: 0.8rem; color: #888;">Drag the film to scroll. Click a photo to zoom! 🎞️</p>
             <div class="film-viewport" id="viewport">
                 <div class="film-strip" id="strip">
-                    <!-- Your 17 Images from GitHub -->
                     <div class="film-frame" onclick="zoomImg('image.png')"><img src="image.png"></div>
                     <div class="film-frame" onclick="zoomImg('image2.png')"><img src="image2.png"></div>
                     <div class="film-frame" onclick="zoomImg('image3.png')"><img src="image3.png"></div>
@@ -202,14 +191,14 @@
             <button class="btn-nav" onclick="showPage(4)">Our Song →</button>
         </div>
 
-        <!-- PAGE 4: SONG -->
+        <!-- PAGE 4 -->
         <div id="page-4" class="page">
             <h1 class="cursive">A Song for Us</h1>
             <iframe id="spotify-player" src="https://open.spotify.com/embed/track/7GmxAMkSJJzXtIunPvsvsr" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             <button class="btn-nav" onclick="showPage(5)">Final Gifts... →</button>
         </div>
 
-        <!-- PAGE 5: ENVELOPES -->
+        <!-- PAGE 5 -->
         <div id="page-5" class="page">
             <h1>Final Gifts</h1>
             <div class="gift-grid">
@@ -220,7 +209,7 @@
             <button class="btn-nav" style="background:var(--accent); color:white; margin-top:50px;" onclick="showPage(6)">Read my final message →</button>
         </div>
 
-        <!-- PAGE 6: THE LONG MESSAGE -->
+        <!-- PAGE 6 -->
         <div id="page-6" class="page">
             <div class="final-letter-container">
                 <h1 class="cursive" style="text-align: center;">For You, Claire ❤️</h1>
@@ -236,12 +225,12 @@
         </div>
     </div>
 
-    <!-- YouTube API for background music -->
+    <!-- YouTube API -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         let player;
-        const bgVideoID = 'GV3HUDMQ-z8'; // Kyle Raphael ID
+        const bgVideoID = 'GV3HUDMQ-z8'; 
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -254,19 +243,26 @@
         function onPlayerReady(event) {}
 
         function startExperience() {
-            if (player && player.playVideo) player.playVideo();
+            // Safety: Try to play music, but change page NO MATTER WHAT
+            try {
+                if (player && typeof player.playVideo === 'function') {
+                    player.playVideo();
+                }
+            } catch (e) {
+                console.log("Music failed to load, but proceeding anyway.");
+            }
             showPage('flower');
         }
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = (typeof id === 'number') ? 'page-' + id : 'page-' + id;
-            document.getElementById(target).classList.add('active');
+            const targetEl = document.getElementById(target);
+            if (targetEl) targetEl.classList.add('active');
             if(id !== 0) spawnHearts();
             
-            // Volume logic
-            if (id === 4 && player) { player.setVolume(20); } 
-            else if (player) { player.setVolume(100); }
+            if (id === 4 && player && player.setVolume) { player.setVolume(20); } 
+            else if (player && player.setVolume) { player.setVolume(100); }
         }
 
         function zoomImg(src) {
@@ -337,7 +333,7 @@
         view.addEventListener('touchend', endDrag);
 
         function spawnHearts() {
-            for(let i=0; i<12; i++) {
+            for(let i=0; i<10; i++) {
                 setTimeout(() => {
                     const h = document.createElement('div');
                     h.className = 'heart'; h.innerHTML = '❤️';
